@@ -64,6 +64,10 @@ const fse = require('fs-extra');
 const fs = require('fs');
 const merge = require('webpack-merge');
 
+/**
+ * 判断路径是否存在
+ * @param {String} path 
+ */
 function fsExistsSync(path) {
   try{
       fs.accessSync(path,fs.F_OK);
@@ -71,6 +75,22 @@ function fsExistsSync(path) {
       return false;
   }
   return true;
+}
+
+/**
+ * 正则替换 
+ * @param {*} key 
+ * @param {*} value 
+ */
+function newReplace(key, value) {
+  if (value instanceof RegExp){
+      // console.log(value.toString().slice(1,-1));
+      // console.log(value.toString());
+      // console.log("@" + value.toString());
+      return ("@" + value.toString());
+  }
+  else
+      return value;
 }
 
 ipc.on('custom', function (event, arg) {
@@ -96,12 +116,16 @@ ipc.on('custom', function (event, arg) {
 
     opt.map((part, index) => {
       const partPath = path.resolve(basePath, part, 'config.js')
-      const partConfig = require('./modules/less/config.js');
+      console.log("partPath:", partPath);
+      const partConfig = require(partPath);
       webPackConfig = merge(webPackConfig, partConfig)
     })
 
-    const webPackStr = JSON.stringify(webPackConfig, null, 4);
-    fs.writeFileSync(mergeFile, webPackStr, 'utf-8');
+    const webPackStr = JSON.stringify(webPackConfig, newReplace, 4);
+    const concatStr = `const a = ` + webPackStr;
+    fs.writeFileSync(mergeFile, concatStr, 'utf-8');
+    const mergeData = fs.readFileSync(mergeFile, "utf-8").replace(/@(\/\\)(\\)/g, "$1");
+    fs.writeFileSync(mergeFile, mergeData, 'utf-8');
     event.sender.send('customReply', '创建完成');
   }
   
