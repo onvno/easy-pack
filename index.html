@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    <!-- We are using Node.js <script>document.write(process.versions.node)</script>,
+    Chromium <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>. -->
+
+    <h1>Easy Pack</h1>
+
+    <!-- 目录 -->
+    <div>
+      <label for="dir">打开目录</label>
+      <input id="dir" />
+    </div>
+
+    <!-- 目录2 -->
+    <div>
+      <label for="dirSelect">选择目录</label>
+      <input id="dirSelect" />
+    </div>
+
+    <!-- 项目名称 -->
+    <div>
+      <label for="project">项目名称</label>
+      <input id="project" />
+    </div>
+
+    <div>
+      <label><input type="checkbox" value="less" class="opt">Less</label>
+      <label><input type="checkbox" value="css" class="opt">CSS</label>
+    </div>
+
+    <input type="button" id="submit" value="Submit"/>
+    <div id="reply"></div>
+
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+      require('./form.js')
+    </script>
+  </body>
+</html>
