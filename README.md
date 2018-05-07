@@ -1,5 +1,15 @@
 # electron-quick-start
 
+
+
+#### 考虑
+
+* 文本替换使用模板引擎，模板合并
+
+
+
+
+
 **Clone and run for a quick way to see Electron in action.**
 
 This is a minimal Electron application based on the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start) within the Electron documentation.

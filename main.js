@@ -107,18 +107,29 @@ ipc.on('custom', function (event, arg) {
     event.sender.send('customReply', '正在生成中');
     fse.ensureDirSync(dirPath);
     
+
     /**
-     * 合并json并生成文件
+     * 合并js / json并生成文件
      */
     const basePath = path.resolve(__dirname, "modules");
     const mergeFile = path.resolve(dirPath, 'webpack.config.js');
-    let webPackConfig = {};
+    const mergeJsonFile = path.resolve(dirPath, 'package.json');
+
+    const baseConfig = require('./base/dev.config');
+    let webPackConfig = baseConfig;
+    const baseJSON = require('./base/package');
+    let packageJSON = baseJSON;
 
     opt.map((part, index) => {
       const partPath = path.resolve(basePath, part, 'config.js')
+      const jsonPath = path.resolve(basePath, part, 'package');
+      
       console.log("partPath:", partPath);
       const partConfig = require(partPath);
       webPackConfig = merge(webPackConfig, partConfig)
+
+      const partJSON = require(jsonPath);
+      packageJSON = merge(packageJSON, partJSON);
     })
 
     const webPackStr = JSON.stringify(webPackConfig, newReplace, 4);
@@ -126,6 +137,10 @@ ipc.on('custom', function (event, arg) {
     fs.writeFileSync(mergeFile, concatStr, 'utf-8');
     const mergeData = fs.readFileSync(mergeFile, "utf-8").replace(/@(\/\\)(\\)/g, "$1");
     fs.writeFileSync(mergeFile, mergeData, 'utf-8');
+
+    const JSONStr = JSON.stringify(packageJSON, null, 4);
+    fs.writeFileSync(mergeJsonFile, JSONStr, 'utf-8');
+
     event.sender.send('customReply', '创建完成');
   }
   
