@@ -1,5 +1,11 @@
 const path = require('path');
 const STATIC = "/";
+
+// exports.test = {
+//     path : require('path'),
+//     STATIC : "/"
+// }
+
 module.exports = {
     module: {
         rules: [

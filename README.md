@@ -5,6 +5,8 @@
 #### 考虑
 
 * 文本替换使用模板引擎，模板合并:http://handlebarsjs.com/
+* 在执行merge之前，所有依赖path等的路径，必须为字符串，需要做处理 $path如何
+* header引入的部分也是用export 变量，最后统一合并
 
 
 
