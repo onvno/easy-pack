@@ -117,27 +117,47 @@ ipc.on('custom', function (event, arg) {
   const mergeFile = path.resolve(dirPath, 'webpack.config.js');
   const mergeJsonFile = path.resolve(dirPath, 'package.json');
 
-  const baseConfig = require('./base/dev.config');
-  let webPackConfig = baseConfig;
+  const baseVarConfig = require('./base/dev.config')
+  const baseVar = baseVarConfig.var;
+  const baseConfig = baseVarConfig.config;
   const baseJSON = require('./base/package');
+
+  let webpackVar = baseVar;
+  let webPackConfig = baseConfig;
   let packageJSON = baseJSON;
 
   opt.map((part, index) => {
     const partPath = path.resolve(basePath, part, 'config.js')
     const jsonPath = path.resolve(basePath, part, 'package');
-    
-    console.log("partPath:", partPath);
-    const partConfig = require(partPath);
+    const partVarConfig = require(partPath);
+    // console.log("partPath:", partPath);
+
+    const partVar = partVarConfig.var;
+    webpackVar = merge(webpackVar, partVar);
+
+    const partConfig = partVarConfig.config;
     webPackConfig = merge(webPackConfig, partConfig)
 
     const partJSON = require(jsonPath);
     packageJSON = merge(packageJSON, partJSON);
   })
 
-  const webPackStr = JSON.stringify(webPackConfig, newReplace, 4);
-  const concatStr = `const a = ` + webPackStr;
-  fs.writeFileSync(mergeFile, concatStr, 'utf-8');
-  const mergeData = fs.readFileSync(mergeFile, "utf-8").replace(/@(\/\\)(\\)/g, "$1");
+  let webPackVarStr = "";
+  const webPackVarKeys = Object.keys(webpackVar);
+  webPackVarKeys.map( (wKey, wIndex) => {
+    webPackVarStr = webPackVarStr +`const ${wKey} = "${webpackVar[wKey]}";\n`
+  })
+
+  const webPackConfigStr = JSON.stringify(webPackConfig, newReplace, 4);
+  const webPackConfigStrWrap = `const configs = ` + webPackConfigStr;
+
+  const webPackConcat = webPackVarStr + '\n' + webPackConfigStrWrap;
+
+  fs.writeFileSync(mergeFile, webPackConcat, 'utf-8');
+  const mergeData = fs.readFileSync(mergeFile, "utf-8")
+          .replace(/@(\/\\)(\\)/g, "$1")
+          .replace(/"<%/g, '')
+          .replace(/%>"/g, '');
   fs.writeFileSync(mergeFile, mergeData, 'utf-8');
 
   const JSONStr = JSON.stringify(packageJSON, null, 4);

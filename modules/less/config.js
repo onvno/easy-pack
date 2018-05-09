@@ -1,12 +1,9 @@
-const path = require('path');
-const STATIC = "/";
+module.exports.var = {
+    path : "<%require('path')%>",
+    STATIC : "/"
+}
 
-// exports.test = {
-//     path : require('path'),
-//     STATIC : "/"
-// }
-
-module.exports = {
+module.exports.config = {
     module: {
         rules: [
             {
@@ -17,7 +14,7 @@ module.exports = {
                     loader: "css-loader", // translates CSS into CommonJS
                     options: {
                         alias: {
-                            "img": path.resolve(STATIC, 'img')
+                            "img": "<%path.resolve(STATIC, 'img')%>"
                         }
                     }
                 }, {
