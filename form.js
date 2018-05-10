@@ -35,13 +35,17 @@ submit.addEventListener('click', (e) => {
     e.stopPropagation();
     let res = {};
     let opt = [];
+    let plug = [];
 
+    // 目录
     const dirDom = document.getElementById('dirSelect');
     res.dirSelect = dirDom.value;
 
+    // 项目名
     const projectDom = document.getElementById('project');
     res.project = projectDom.value;
 
+    // rules集合
     const optDoms = document.querySelectorAll('.opt');
     for(let i=0; i<optDoms.length; i++) {
         if(optDoms[i].checked === true) {
@@ -49,6 +53,16 @@ submit.addEventListener('click', (e) => {
         }
     }
     res.opt = opt;
+
+    // 插件集合
+    const plugDoms = document.querySelectorAll('.plug');
+    for(let j=0; j<plugDoms.length; j++) {
+        if(plugDoms[j].checked === true) {
+            plug.push(plugDoms[j].value)
+        }
+    }
+    res.plug = plug
+
 
     ipcRenderer.send('custom', res)
 })

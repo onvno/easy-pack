@@ -97,7 +97,7 @@ ipc.on('custom', function (event, arg) {
   // 返回arg对象后台处理
   const dir = arg.dirSelect;
   const pro = arg.project;
-  const {opt} = arg;
+  const {opt, plug} = arg;
   const dirPath = path.resolve(dir, pro);
   
 
@@ -114,6 +114,7 @@ ipc.on('custom', function (event, arg) {
    * 合并js / json并生成文件
    */
   const basePath = path.resolve(__dirname, "modules");
+  const plugBasePath = path.resolve(__dirname, "plugins");
   const mergeFile = path.resolve(dirPath, 'webpack.config.js');
   const mergeJsonFile = path.resolve(dirPath, 'package.json');
 
@@ -126,6 +127,7 @@ ipc.on('custom', function (event, arg) {
   let webPackConfig = baseConfig;
   let packageJSON = baseJSON;
 
+  // 处理rule
   opt.map((part, index) => {
     const partPath = path.resolve(basePath, part, 'config.js')
     const jsonPath = path.resolve(basePath, part, 'package');
@@ -142,6 +144,19 @@ ipc.on('custom', function (event, arg) {
     packageJSON = merge(packageJSON, partJSON);
   })
 
+  // 处理plug
+  plug.map((part, index) => {
+    const partPath = path.resolve(plugBasePath, part, 'config.js');
+    const partVarConfig = require(partPath);
+    
+    const partVar = partVarConfig.var;
+    webpackVar = merge(webpackVar, partVar);
+
+    const partConfig = partVarConfig.config;
+    webPackConfig = merge(webPackConfig, partConfig)
+
+  })
+
   let webPackVarStr = "";
   const webPackVarKeys = Object.keys(webpackVar);
   webPackVarKeys.map( (wKey, wIndex) => {
@@ -155,7 +170,8 @@ ipc.on('custom', function (event, arg) {
 
   fs.writeFileSync(mergeFile, webPackConcat, 'utf-8');
   const mergeData = fs.readFileSync(mergeFile, "utf-8")
-          .replace(/@(\/\\)(\\)/g, "$1")
+          .replace(/"@(\/\\)(\\)(\S*)"/g, "$1$3")
+          .replace(/"@(\/\S*)"/g, "$1")     // 处理"@/node_modules/"
           .replace(/"<%/g, '')
           .replace(/%>"/g, '');
   fs.writeFileSync(mergeFile, mergeData, 'utf-8');
