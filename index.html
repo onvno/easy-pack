@@ -21,7 +21,7 @@
     <!-- 目录2 -->
     <div>
       <label for="dirSelect">选择目录</label>
-      <input id="dirSelect" />
+      <input id="dirSelect" value="/Users/AYA/Desktop" />
     </div>
 
     <!-- 项目名称 -->
@@ -46,6 +46,21 @@
       <label><input type="checkbox" value="browser" class="plug" checked=true>打开浏览器</label>
       <label><input type="checkbox" value="hot" class="plug" checked=true>热更新</label>
       <label><input type="checkbox" value="html" class="plug" checked=true>htm模板</label>
+    </div>
+
+    <div>
+      <h4>高级配置</h4>
+      <label><input type="checkbox" value="dll" class="split" checked=true>DLL代码分割</label>
+      <div>
+        <label for="baseAry">基本依赖</label>
+        <input id="baseAry" value="test1,test2" />
+        <label for="frameAry">框架依赖</label>
+        <input id="frameAry" value="koa1,koa2" />
+        <label for="buildDir">build目录</label>
+        <input id="buildDir" value="dist" />
+        <label for="devDir">dev目录</label>
+        <input id="devDir" value="dev" />
+      </div>
     </div>
 
     <input type="button" id="submit" value="Submit"/>

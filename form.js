@@ -63,6 +63,23 @@ submit.addEventListener('click', (e) => {
     }
     res.plug = plug
 
+    // dll相关
+    const baseAryDom = document.getElementById('baseAry');
+    baseAry = baseAryDom.value.split(',');
+
+    const frameAryDom = document.getElementById('frameAry');
+    frameAry = frameAryDom.value.split(',');
+
+    const buildDir = document.getElementById('buildDir').value;
+    const devDir = document.getElementById('devDir').value;
+
+    res.dll = {
+        baseAry,
+        frameAry,
+        buildDir,
+        devDir
+    }
+
 
     ipcRenderer.send('custom', res)
 })

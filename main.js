@@ -97,7 +97,7 @@ ipc.on('custom', function (event, arg) {
   // 返回arg对象后台处理
   const dir = arg.dirSelect;
   const pro = arg.project;
-  const {opt, plug} = arg;
+  const {opt, plug, dll} = arg;
   const dirPath = path.resolve(dir, pro);
   
 
@@ -109,13 +109,18 @@ ipc.on('custom', function (event, arg) {
   event.sender.send('customReply', '正在生成中');
   fse.ensureDirSync(dirPath);
   
+  /**
+   * 拷贝目录
+   */
+  const tempDirPath = path.resolve(__dirname, 'dir')
+  fse.copySync(tempDirPath, dirPath);
 
   /**
    * 合并js / json并生成文件
    */
   const basePath = path.resolve(__dirname, "modules");
   const plugBasePath = path.resolve(__dirname, "plugins");
-  const mergeFile = path.resolve(dirPath, 'webpack.config.js');
+  const mergeFile = path.resolve(dirPath, './config/webpack.config.js');
   const mergeJsonFile = path.resolve(dirPath, 'package.json');
 
   const baseVarConfig = require('./base/dev.config')
@@ -147,6 +152,7 @@ ipc.on('custom', function (event, arg) {
   // 处理plug
   plug.map((part, index) => {
     const partPath = path.resolve(plugBasePath, part, 'config.js');
+    const jsonPath = path.resolve(plugBasePath, part, 'package');
     const partVarConfig = require(partPath);
     
     const partVar = partVarConfig.var;
@@ -155,6 +161,8 @@ ipc.on('custom', function (event, arg) {
     const partConfig = partVarConfig.config;
     webPackConfig = merge(webPackConfig, partConfig)
 
+    const partJSON = require(jsonPath);
+    packageJSON = merge(packageJSON, partJSON);
   })
 
   let webPackVarStr = "";
@@ -180,11 +188,16 @@ ipc.on('custom', function (event, arg) {
   fs.writeFileSync(mergeJsonFile, JSONStr, 'utf-8');
 
 
-  /**
-   * 拷贝目录
-   */
-  const tempDirPath = path.resolve(__dirname, 'dir')
-  fse.copySync(tempDirPath, dirPath);
+  const Mustache = require('mustache');
+  const dllTempPath = path.resolve(__dirname, './split/dll/webpack.dll.temp')
+  // console.log('dllTempPath:', dllTempPath);
+  const dllTempData = fs.readFileSync(dllTempPath, 'utf-8');
+  // console.log("dllTempData:", dllTempData);
+  const dllConfigPath = path.resolve(dirPath, './config/webpack.dll.js');
+  const renderData = Mustache.render(dllTempData, dll);
+  fs.writeFileSync(dllConfigPath, renderData, 'utf-8');
+  // console.log("m:", mustache);
+
 
   event.sender.send('customReply', '创建完成');
 })

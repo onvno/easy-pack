@@ -5,34 +5,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const Libs = {
     // ui: ['antd'],
-    base: [
-        'lodash',
-        'immutable',
-        'moment',
-        'axios',
-        'qs'
-    ],
-    frame: [
-        'babel-polyfill',
-        'react',
-        'react-dom',
-        'redux',
-        'react-redux',
-        'react-router-dom'
-    ],
+    base: [{{#baseAry}}"{{.}}",{{/baseAry}}],
+    frame: [{{#frameAry}}"{{.}}",{{/frameAry}}],
 }
 
-// const vendor = [
-//     'react',
-//     'react-dom',
-//     'react-router-dom',
-//     'redux',
-//     'react-redux',
-//     'lodash'
-// ]
-
 const isProEnv = process.env.NODE_ENV === 'production';
-const outputPath = isProEnv ? path.resolve(ROOT, 'dist') : path.resolve(ROOT, 'dev'); 
+const outputPath = isProEnv ? path.resolve(ROOT, '{{buildDir}}') : path.resolve(ROOT, '{{devDir}}'); 
 
 const DllConfig = {
     entry: {...Libs},
