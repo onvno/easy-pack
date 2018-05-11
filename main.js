@@ -184,8 +184,8 @@ ipc.on('custom', function (event, arg) {
           .replace(/%>"/g, '');
   fs.writeFileSync(mergeFile, mergeData, 'utf-8');
 
-  const JSONStr = JSON.stringify(packageJSON, null, 4);
-  fs.writeFileSync(mergeJsonFile, JSONStr, 'utf-8');
+  // const JSONStr = JSON.stringify(packageJSON, null, 4);
+  // fs.writeFileSync(mergeJsonFile, JSONStr, 'utf-8');
 
 
   const Mustache = require('mustache');
@@ -197,7 +197,30 @@ ipc.on('custom', function (event, arg) {
   const renderData = Mustache.render(dllTempData, dll);
   fs.writeFileSync(dllConfigPath, renderData, 'utf-8');
   // console.log("m:", mustache);
+  //baseAry frameAry
+  
 
+  const latestVersion = require('latest-version');
+  const dllPackage = dll.baseAry.concat(dll.frameAry);
+  let packObj = {};
+  const getVersion = async (package) => {
+    const version = await latestVersion(package)
+    packObj[package] = `^${version}`;
+    return `^${version}`;
+  }
+  let promises = dllPackage.map((pack) => getVersion(pack))
+  Promise.all(promises)
+      .then((data) => {
+          const dllPackageDepend = {
+            "devDependencies": packObj
+          }
+          packageJSON = merge(packageJSON, dllPackageDepend);
+          const JSONStr = JSON.stringify(packageJSON, null, 4);
+          fs.writeFileSync(mergeJsonFile, JSONStr, 'utf-8');
+      })
+      .catch((err) => {
+          console.log("err:", err);
+      })
 
   event.sender.send('customReply', '创建完成');
 })
