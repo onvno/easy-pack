@@ -1,10 +1,8 @@
 // base
 const path = require('path');
 const webpack = require('webpack');
-const hotMiddlewareScript = "webpack-hot-middleware/client?reload=true";
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
-const OpenBrowserPlugin = require("open-browser-webpack-plugin");
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 // 生产阶段
@@ -122,10 +120,6 @@ module.exports = {
 				},
 			}
 		}),
-        new webpack.DefinePlugin({
-			IS_PRODUCTION: JSON.stringify(false),
-			IS_LOCAL: JSON.stringify(JSON.parse(process.env.NODE_ENV || 'false')),
-        }),
         new webpack.optimize.CommonsChunkPlugin({
 			names: ['vendor'],
 			filename: 'vendor.[hash:5].js',
@@ -133,11 +127,6 @@ module.exports = {
 				resource && resource.indexOf('node_modules') && resource.match(/\.js$/);
 			},
 		}),
-        // new webpack.DllReferencePlugin({
-        //     manifest: require('../dev/ui-manifest.json'),
-        //     sourceType: 'var',
-        //     context: ROOT
-        // }),
         new webpack.DllReferencePlugin({
             context: ROOT,
             manifest: require('../dist/base-manifest.json'),
@@ -159,11 +148,6 @@ module.exports = {
         new AddAssetHtmlPlugin([
             { filepath: require.resolve('../dist/base'), includeSourcemap: false, hash: true },
             { filepath: require.resolve('../dist/frame'), includeSourcemap: false, hash: true },
-        ]),
-        new webpack.DefinePlugin({
-			'process.env': {
-				'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-			}
-		})
+        ])
     ]
 }
