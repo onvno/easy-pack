@@ -92,9 +92,9 @@
         <h4>依赖预编译DLL</h4>
         <label class="checkbox-inline"><input type="checkbox" value="dll" class="split" checked=true>DLL代码分割</label>
         <div>
-          <div>
-              <label class="label-tit" for="baseAry">基本依赖</label>
-              <input type="text" id="baseAry" placeholder="多个依赖以逗号,分割" />
+          <div class="mt5">
+              <label class="label-tit" for="baseAry">工具依赖</label>
+              <input type="text" id="baseAry" value="lodash" placeholder="多个依赖以逗号,分割" />
           </div>
           <div>
               <label class="label-tit" for="frameAry">框架依赖</label>
@@ -123,7 +123,7 @@
         </div>
       </div>
       
-      <div class="carding">
+      <div class="carding pad10">
           <input type="button" id="submit" value="创建"/>
           <div id="reply">前端, 总该对自己好一点, Easy Pack !</div>
       </div>
