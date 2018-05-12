@@ -8,7 +8,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const proxy = require("http-proxy-middleware");
 // const history = require('connect-history-api-fallback');
 
-const CONST = require('./constant.json');
+const CONST = require('../config/constant.json');
 
 const app = express();
 const compiler = webpack(config);

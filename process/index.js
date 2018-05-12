@@ -73,7 +73,7 @@ ipc.on('custom', function (event, arg) {
     );
 
     if(global) {
-        const globalPath = path.resolve(ProjectPath, 'bin/constant.json');
+        const globalPath = path.resolve(ProjectPath, 'config/constant.json');
         fs.writeFileSync(globalPath, JSON.stringify(global, null, 4), 'utf-8');
     }
 

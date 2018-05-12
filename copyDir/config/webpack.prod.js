@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
+const CONST = require('./constant.json');
+
 // 生产阶段
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const ROOT = path.resolve(__dirname, '../');
@@ -17,7 +19,7 @@ module.exports = {
     },
 
     output: {
-        path: path.resolve(ROOT, 'dist'),
+        path: path.resolve(ROOT, `${CONST.buildDir}`),
         filename: '[name].[chunkhash:5].js',
         publicPath: '/'
     },
@@ -44,12 +46,12 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 include: path.resolve(ROOT, "src"),
-                use: ["cache-loader", "babel-loader"],
+                use: [ "babel-loader"],
             },
 
             {
                 test: /\.css$/,
-                use: ["style-loader", "css-loader?minimize", "postcss-loader"],
+                use: ["style-loader", "css-loader?minimize"],
             },
 
             {
@@ -57,7 +59,6 @@ module.exports = {
                 use: [
                     "style-loader",
                     "css-loader?minimize",
-                    "postcss-loader",
                     {
                         loader: "less-loader",
                         options: { javascriptEnabled: true }
@@ -129,12 +130,12 @@ module.exports = {
 		}),
         new webpack.DllReferencePlugin({
             context: ROOT,
-            manifest: require('../dist/base-manifest.json'),
+            manifest: require(`../${CONST.buildDir}/base-manifest.json`),
             sourceType: 'var'
         }),
         new webpack.DllReferencePlugin({
             context: ROOT,
-            manifest: require('../dist/frame-manifest.json'),
+            manifest: require(`../${CONST.buildDir}/frame-manifest.json`),
             sourceType: 'var'
         }),
         new HtmlWebpackPlugin({
@@ -146,8 +147,8 @@ module.exports = {
             chunks: ["vendor","index"]
         }),
         new AddAssetHtmlPlugin([
-            { filepath: require.resolve('../dist/base'), includeSourcemap: false, hash: true },
-            { filepath: require.resolve('../dist/frame'), includeSourcemap: false, hash: true },
+            { filepath: require.resolve(`../${CONST.buildDir}/base`), includeSourcemap: false, hash: true },
+            { filepath: require.resolve(`../${CONST.buildDir}/frame`), includeSourcemap: false, hash: true },
         ])
     ]
 }
