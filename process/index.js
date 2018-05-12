@@ -120,7 +120,7 @@ ipc.on('custom', function (event, arg) {
     /**
      * 整体文件写入
      */
-    const writeRes = writeFile(getState(), ProjectPath)
+    const writeRes = writeFile(getState(), ProjectPath, dispatch)
     
     if(writeRes) {
         event.sender.send('customReply', '创建完成');

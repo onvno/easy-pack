@@ -5,8 +5,9 @@ const fs = require('fs');
 const path = require('path');
 const merge = require('webpack-merge');
 const Util = require('./utils.js');
+const { TYPES } = require('./reducer.js');
 
-const writeFile = (state , ProjectPath) => {
+const writeFile = (state , ProjectPath, dispatch) => {
     const {Packages, Vars, Configs} = state;
 
     /**
@@ -39,6 +40,16 @@ const writeFile = (state , ProjectPath) => {
             .replace(/"<%/g, '')
             .replace(/%>"/g, '');
     fs.writeFileSync(mergeFile, mergeData, 'utf-8');
+
+    dispatch({
+        type: TYPES.update,
+        payload: {
+            Packages: {},
+            Vars: {},
+            Configs: {},
+        }
+    })
+
     return true;
 }
 

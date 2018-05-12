@@ -10,7 +10,7 @@ module.exports.config = {
     devtool: 'cheap-module-eval-source-map',
 
     entry: {
-        index: ["babel-polyfill", "./src/index.js", "<%hotMiddlewareScript%>"]
+        index: ["babel-polyfill", "./src/index.js"]
     },
     output: {
         path: "<%path.resolve(ROOT, 'dev')%>",
