@@ -24,19 +24,17 @@ function createWindow () {
   })
 
   // 测试请求
-  const {net} = require('electron')
-  const request = net.request('https://github.com')
-  request.on('response', (response) => {
-      // console.log(`STATUS: ${response.statusCode}`)
-      // console.log(`HEADERS: ${JSON.stringify(response.headers)}`)
-      response.on('data', (chunk) => {
-          // console.log(`BODY: ${chunk}`)
-      })
-      response.on('end', () => {
-          // console.log('No more data in response.')
-      })
-  })
-  request.end()
+  // const {net} = require('electron')
+  // const request = net.request('https://github.com')
+  // request.on('response', (response) => {
+  //     response.on('data', (chunk) => {
+  //         // console.log(`BODY: ${chunk}`)
+  //     })
+  //     response.on('end', () => {
+  //         // console.log('No more data in response.')
+  //     })
+  // })
+  // request.end()
 }
 
 // This method will be called when Electron has finished

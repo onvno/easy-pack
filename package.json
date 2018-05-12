@@ -23,5 +23,8 @@
     "latest-version": "^3.1.0",
     "mustache": "^2.3.0",
     "webpack-merge": "^4.1.2"
+  },
+  "dependencies": {
+    "redux": "^4.0.0"
   }
 }
