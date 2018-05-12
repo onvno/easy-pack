@@ -42,32 +42,63 @@
   
       <div class="carding">
         <h4>编译类型</h4>
-        <label class="checkbox-inline"><input type="checkbox" value="less" class="opt" checked=true>Less</label>
-        <label class="checkbox-inline"><input type="checkbox" value="css" class="opt" checked=true>CSS</label>
-        <label class="checkbox-inline"><input type="checkbox" value="ts" class="opt" checked=true>TypeScript</label>
-        <label class="checkbox-inline"><input type="checkbox" value="js" class="opt" checked=true>JavaScript</label>
-        <label class="checkbox-inline"><input type="checkbox" value="jpg" class="opt" checked=true>图片</label>
-        <label class="checkbox-inline"><input type="checkbox" value="font" class="opt" checked=true>字体</label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="less" class="opt">
+            Less
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="scss" class="opt">
+            SCSS
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="css" class="opt" checked=true disabled>
+            CSS
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="ts" class="opt">
+            TypeScript
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="js" class="opt" checked=true disabled>
+            JavaScript
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="jpg" class="opt" checked=true disabled>
+            图片
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="font" class="opt" >
+            字体
+        </label>
       </div>
     
       <div class="carding">
         <h4>常用插件</h4> 
-        <label  class="checkbox-inline"><input type="checkbox" value="browser" class="plug" checked=true>打开浏览器</label>
-        <label  class="checkbox-inline"><input type="checkbox" value="hot" class="plug" checked=true>热更新</label>
-        <label  class="checkbox-inline"><input type="checkbox" value="html" class="plug" checked=true>htm模板</label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="browser" class="plug" checked=true disabled>
+            打开浏览器
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="hot" class="plug" checked=true disabled>
+            热更新
+        </label>
+        <label  class="checkbox-inline">
+            <input type="checkbox" value="html" class="plug" checked=true disabled>
+            htm模板
+        </label>
       </div>
     
       <div class="carding">
-        <h4>高级配置</h4>
+        <h4>依赖预编译DLL</h4>
         <label class="checkbox-inline"><input type="checkbox" value="dll" class="split" checked=true>DLL代码分割</label>
         <div>
           <div>
               <label class="label-tit" for="baseAry">基本依赖</label>
-              <input type="text" id="baseAry" value="lodash,immutable" />
+              <input type="text" id="baseAry" placeholder="多个依赖以逗号,分割" />
           </div>
           <div>
               <label class="label-tit" for="frameAry">框架依赖</label>
-              <input type="text" id="frameAry" value="react,react-dom" />
+              <input type="text" id="frameAry" value="react,react-dom" placeholder="多个依赖以,分割" />
           </div>
           <div>
               <label class="label-tit" for="buildDir">build目录</label>
@@ -83,7 +114,10 @@
       <div class="carding">
         <h4>开发服务器(默认选用了express)</h4>
         <div>
-            <label class="checkbox-inline"><input type="checkbox" value="browser" id="mock" checked=true>是否开启mock</label>
+            <label class="checkbox-inline">
+                <input type="checkbox" value="browser" id="mock" >
+                是否开启mock
+            </label>
             <label class="checkbox-inline"><input type="checkbox" value="browser" id="proxy" checked>是否开启代理</label>
             <a class="readme">→mock及proxy使用说明</a>
         </div>
