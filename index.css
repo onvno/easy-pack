@@ -1,0 +1,97 @@
+body{
+    width:350px;
+    height:650px;
+    float:left;
+    background: #eee;
+    font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding:0;
+    margin: 0;
+}
+.wrap{
+    /* background: #fff;
+    padding: 0 15px; */
+}
+.carding{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 2px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background: #fff;
+    padding: 15px;
+    overflow: hidden;
+}
+label, input{
+    font-weight: lighter;
+}
+input{
+    border: 0;
+    border-bottom: 1px solid #ddd;
+    text-indent: 5px;
+    color:#999;
+    outline: none;
+}
+h4{
+    margin-top: 0;
+    font-weight: lighter;
+}
+
+/* title */
+.title{
+    margin-bottom: 3px;
+    background: #2086d7;
+    color: #fff;
+}
+.title h1{
+    margin:0;
+    padding: 20px;
+    font-size: 30px;
+    font-weight: lighter;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+/* checkbox */
+.checkbox-inline{
+    margin-right: 15px;
+    margin-left: 0px;
+    font-weight: lighter;
+    color: #999;
+}
+.checkbox-inline + .checkbox-inline{
+    margin-left:0;
+}
+.radio-inline, .checkbox-inline{
+    padding-left: 15px;
+}
+.checkbox-inline input[type="checkbox"]{
+    margin-left: -15px;
+}
+
+.label-tit{
+    width: 56px;
+}
+.readme{
+    display: block;
+    margin-top:5px;
+    font-weight: lighter;
+}
+
+#submit{
+    float:left;
+    width: 40px;
+    text-align: center;
+    height: 40px;
+    text-indent: 0;
+    border-radius: 60px;
+    color: #fff;
+    background: #2086d7;
+}
+
+#reply{
+    float:left;
+    height:40px;
+    line-height: 40px;
+    font-weight:lighter;
+    margin-left: 5px;
+}

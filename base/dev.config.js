@@ -2,6 +2,7 @@ module.exports.var = {
     hotMiddlewareScript : "webpack-hot-middleware/client?reload=true",
     path : "<%require('path')%>",
     ROOT : "<%path.resolve(__dirname, '../')%>",
+    HtmlWebpackPlugin : "<%require('html-webpack-plugin')%>",
 }
 
 
@@ -27,4 +28,12 @@ module.exports.config = {
         }
     },
     externals: {},
+    plugins: [
+        "<%new HtmlWebpackPlugin({\
+            filename: 'index.html',\
+            template: './src/index.html',\
+            inject: 'body',\
+            chunks: ['index']\
+        })%>",
+    ]
 }

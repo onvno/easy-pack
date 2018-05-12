@@ -2,7 +2,10 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Pack</title>
+    <link rel="stylesheet" href="./lib/bootstrap.css">
+    <link rel="stylesheet" href="index.css">
   </head>
   <body>
     <!-- All of the Node.js APIs are available in this renderer process. -->
@@ -10,61 +13,88 @@
     Chromium <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>. -->
 
-    <h1>Easy Pack</h1>
+    <div class="wrap">
+      <div class="title">
+          <h1>Easy Pack</h1>
+      </div>
 
-    <!-- 目录 -->
-    <div>
-      <label for="dir">打开目录</label>
-      <input id="dir" />
-    </div>
+      <!-- 目录 -->
+      <div style="display: none;">
+          <label for="dir">打开目录</label>
+          <input id="dir" />
+      </div>
 
-    <!-- 目录2 -->
-    <div>
-      <label for="dirSelect">选择目录</label>
-      <input id="dirSelect" value="/Users/AYA/Desktop" />
-    </div>
+      <div class="project_wrap carding">
+          <h4>创建项目</h4>
+          <!--选择目录  -->
+          <div>
+              <label class="label-tit" for="dirSelect">项目路径</label>
+              <input id="dirSelect" value="/Users/AYA/Desktop" />
+          </div>
 
-    <!-- 项目名称 -->
-    <div>
-      <label for="project">项目名称</label>
-      <input id="project" />
-    </div>
+          <div>
+              <!-- 项目名称 -->
+              <label class="label-tit" for="project">项目名称</label>
+              <input id="project" />
+          </div>
+      </div>
 
-    <div>
-      <h4>Rules</h4>
-      <label><input type="checkbox" value="less" class="opt" checked=true>Less</label>
-      <label><input type="checkbox" value="css" class="opt" checked=true>CSS</label>
-      <label><input type="checkbox" value="ts" class="opt" checked=true>TypeScript</label>
-      <label><input type="checkbox" value="js" class="opt" checked=true>JavaScript</label>
-      <label><input type="checkbox" value="jpg" class="opt" checked=true>图片</label>
-      <label><input type="checkbox" value="font" class="opt" checked=true>字体</label>
+  
+      <div class="carding">
+        <h4>编译类型</h4>
+        <label class="checkbox-inline"><input type="checkbox" value="less" class="opt" checked=true>Less</label>
+        <label class="checkbox-inline"><input type="checkbox" value="css" class="opt" checked=true>CSS</label>
+        <label class="checkbox-inline"><input type="checkbox" value="ts" class="opt" checked=true>TypeScript</label>
+        <label class="checkbox-inline"><input type="checkbox" value="js" class="opt" checked=true>JavaScript</label>
+        <label class="checkbox-inline"><input type="checkbox" value="jpg" class="opt" checked=true>图片</label>
+        <label class="checkbox-inline"><input type="checkbox" value="font" class="opt" checked=true>字体</label>
+      </div>
+    
+      <div class="carding">
+        <h4>常用插件</h4> 
+        <label  class="checkbox-inline"><input type="checkbox" value="browser" class="plug" checked=true>打开浏览器</label>
+        <label  class="checkbox-inline"><input type="checkbox" value="hot" class="plug" checked=true>热更新</label>
+        <label  class="checkbox-inline"><input type="checkbox" value="html" class="plug" checked=true>htm模板</label>
+      </div>
+    
+      <div class="carding">
+        <h4>高级配置</h4>
+        <label class="checkbox-inline"><input type="checkbox" value="dll" class="split" checked=true>DLL代码分割</label>
+        <div>
+          <div>
+              <label class="label-tit" for="baseAry">基本依赖</label>
+              <input id="baseAry" value="lodash,immutable" />
+          </div>
+          <div>
+              <label class="label-tit" for="frameAry">框架依赖</label>
+              <input id="frameAry" value="react,react-dom" />
+          </div>
+          <div>
+              <label class="label-tit" for="buildDir">build目录</label>
+              <input id="buildDir" value="dist" />
+          </div>
+          <div>
+              <label class="label-tit" for="devDir">dev目录</label>
+              <input id="devDir" value="dev" />
+          </div>
+        </div>
+      </div>
+    
+      <div class="carding">
+        <h4>开发服务器(默认选用了express)</h4>
+        <div>
+            <label class="checkbox-inline"><input type="checkbox" value="browser" id="mock" checked=true>是否开启mock</label>
+            <label class="checkbox-inline"><input type="checkbox" value="browser" id="proxy" checked>是否开启代理</label>
+            <a class="readme">→mock及proxy使用说明</a>
+        </div>
+      </div>
       
-    </div>
-
-    <div>
-      <h4>Plugins</h4> 
-      <label><input type="checkbox" value="browser" class="plug" checked=true>打开浏览器</label>
-      <label><input type="checkbox" value="hot" class="plug" checked=true>热更新</label>
-      <label><input type="checkbox" value="html" class="plug" checked=true>htm模板</label>
-    </div>
-
-    <div>
-      <h4>高级配置</h4>
-      <label><input type="checkbox" value="dll" class="split" checked=true>DLL代码分割</label>
-      <div>
-        <label for="baseAry">基本依赖</label>
-        <input id="baseAry" value="lodash,immutable" />
-        <label for="frameAry">框架依赖</label>
-        <input id="frameAry" value="react,react-dom" />
-        <label for="buildDir">build目录</label>
-        <input id="buildDir" value="dist" />
-        <label for="devDir">dev目录</label>
-        <input id="devDir" value="dev" />
+      <div class="carding">
+          <input type="button" id="submit" value="创建"/>
+          <div id="reply">前端, 总该对自己好一点, Easy Pack !</div>
       </div>
     </div>
 
-    <input type="button" id="submit" value="Submit"/>
-    <div id="reply"></div>
 
     <script>
       // You can also require other files to run in this process

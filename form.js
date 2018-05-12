@@ -77,8 +77,19 @@ submit.addEventListener('click', (e) => {
         baseAry,
         frameAry,
         buildDir,
+        devDir,
+    }
+
+    // 服务器配置相关
+    const mockStatus = document.getElementById('mock').checked;
+    const proxyStatus = document.getElementById('proxy').checked;
+    const global = {
+        mock: mockStatus,
+        proxy: proxyStatus,
+        buildDir,
         devDir
     }
+    res.global = global;
 
 
     ipcRenderer.send('custom', res)

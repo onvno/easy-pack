@@ -1,0 +1,8 @@
+{
+    "devDependencies": {
+        "chalk": "^2.4.1",
+        "express": "^4.16.3",
+        "webpack-dev-middleware": "^2.0.6",
+        "webpack-hot-middleware": "^2.22.1"
+    }
+}

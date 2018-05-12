@@ -4,13 +4,16 @@
 
 #### 考虑
 
-* 文本替换使用模板引擎，模板合并:http://handlebarsjs.com/
+* 文本替换使用模板引擎，模板合并:http://handlebarsjs.com/ - dll处使用 - 👌
 * 在执行merge之前，所有依赖path等的路径，必须为字符串，需要做处理 $path如何
-* header引入的部分也是用export 变量，最后统一合并 - ok
+* header引入的部分也是用export 变量，最后统一合并 - 👌
 * plugin未引入package.json - 👌
 * 字体图标正则匹配有问题
-* 引入dll,但未添加package.json - 版本采用默认 + 版本号
+* 引入dll,添加package.json - 目前采用最新版本。 以后可改进为默认最新，可选择填写粗版本号 👌
+* package基本信息 👌
+* server - proxy & mock 👌
 
+#### 思考全局变量
 
 
 

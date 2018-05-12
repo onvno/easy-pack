@@ -1,0 +1,6 @@
+{
+    "mock": true,
+    "proxy": true,
+    "buildDir": "dist",
+    "devDir": "dev"
+}

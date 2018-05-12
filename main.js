@@ -9,7 +9,7 @@ const ROOTPATH = __dirname;
 let mainWindow
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({width: 800, height: 650})
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
@@ -97,7 +97,7 @@ ipc.on('custom', function (event, arg) {
   // 返回arg对象后台处理
   const dir = arg.dirSelect;
   const pro = arg.project;
-  const {opt, plug, dll} = arg;
+  const {opt, plug, dll, global} = arg;
   const dirPath = path.resolve(dir, pro);
   
 
@@ -114,6 +114,19 @@ ipc.on('custom', function (event, arg) {
    */
   const tempDirPath = path.resolve(__dirname, 'dir')
   fse.copySync(tempDirPath, dirPath);
+
+  const serverPath = path.resolve(__dirname, 'server/server.js');
+  const serverProPath = path.resolve(dirPath, 'bin/server.js');
+  fse.copySync(serverPath, serverProPath)
+
+  /**
+   * 生成全局变量 - 缺判断
+   */
+  if(global) {
+    const globalPath = path.resolve(dirPath, 'bin/constant.json');
+    fs.writeFileSync(globalPath, JSON.stringify(global, null, 4), 'utf-8');
+  }
+  
 
   /**
    * 合并js / json并生成文件
@@ -165,29 +178,32 @@ ipc.on('custom', function (event, arg) {
     packageJSON = merge(packageJSON, partJSON);
   })
 
-  let webPackVarStr = "";
-  const webPackVarKeys = Object.keys(webpackVar);
-  webPackVarKeys.map( (wKey, wIndex) => {
-    webPackVarStr = webPackVarStr +`const ${wKey} = "${webpackVar[wKey]}";\n`
-  })
 
-  const webPackConfigStr = JSON.stringify(webPackConfig, newReplace, 4);
-  const webPackConfigStrWrap = `const configs = ` + webPackConfigStr;
 
-  const webPackConcat = webPackVarStr + '\n' + webPackConfigStrWrap;
+  // 文件写入 -webpack
+  // let webPackVarStr = "";
+  // const webPackVarKeys = Object.keys(webpackVar);
+  // webPackVarKeys.map( (wKey, wIndex) => {
+  //   webPackVarStr = webPackVarStr +`const ${wKey} = "${webpackVar[wKey]}";\n`
+  // })
+  // const webPackConfigStr = JSON.stringify(webPackConfig, newReplace, 4);
+  // const webPackConfigStrWrap = `const configs = ` + webPackConfigStr;
+  // const webPackConcat = webPackVarStr + '\n' + webPackConfigStrWrap;
+  // fs.writeFileSync(mergeFile, webPackConcat, 'utf-8');
+  // const mergeData = fs.readFileSync(mergeFile, "utf-8")
+  //         .replace(/"@(\/\\)(\\)(\S*)"/g, "$1$3")
+  //         .replace(/"@(\/\S*)"/g, "$1")     // 处理"@/node_modules/"
+  //         .replace(/"<%/g, '')
+  //         .replace(/%>"/g, '');
+  // fs.writeFileSync(mergeFile, mergeData, 'utf-8');
 
-  fs.writeFileSync(mergeFile, webPackConcat, 'utf-8');
-  const mergeData = fs.readFileSync(mergeFile, "utf-8")
-          .replace(/"@(\/\\)(\\)(\S*)"/g, "$1$3")
-          .replace(/"@(\/\S*)"/g, "$1")     // 处理"@/node_modules/"
-          .replace(/"<%/g, '')
-          .replace(/%>"/g, '');
-  fs.writeFileSync(mergeFile, mergeData, 'utf-8');
-
+  // 文件写入 - json
   // const JSONStr = JSON.stringify(packageJSON, null, 4);
   // fs.writeFileSync(mergeJsonFile, JSONStr, 'utf-8');
 
 
+
+  // 如dll不存在则上边结束，写入文件， 如dll存在，则执行以下
   const Mustache = require('mustache');
   const dllTempPath = path.resolve(__dirname, './split/dll/webpack.dll.temp')
   // console.log('dllTempPath:', dllTempPath);
@@ -212,11 +228,40 @@ ipc.on('custom', function (event, arg) {
   Promise.all(promises)
       .then((data) => {
           const dllPackageDepend = {
-            "devDependencies": packObj
+            "dependencies": packObj
           }
           packageJSON = merge(packageJSON, dllPackageDepend);
+          const dllEntryConfigPath = path.resolve(__dirname, './split/dll/config.js')
+          const dllEntryConfig = require(dllEntryConfigPath);
+          webPackConfig = merge(webPackConfig, dllEntryConfig);
+          
+          // 写入文件 - json
           const JSONStr = JSON.stringify(packageJSON, null, 4);
           fs.writeFileSync(mergeJsonFile, JSONStr, 'utf-8');
+
+          // 写入文件 - webpack
+          const partVar = dllEntryConfig.var;
+          webpackVar = merge(webpackVar, partVar);
+          const partConfig = dllEntryConfig.config;
+          webPackConfig = merge(webPackConfig, partConfig)
+          const webPackConfigStr = JSON.stringify(webPackConfig, newReplace, 4);
+          const webPackConfigStrWrap = `const configs = ` + webPackConfigStr;
+
+          let webPackVarStr = "";
+          const webPackVarKeys = Object.keys(webpackVar);
+          webPackVarKeys.map( (wKey, wIndex) => {
+            webPackVarStr = webPackVarStr +`const ${wKey} = "${webpackVar[wKey]}";\n`
+          })
+
+          const webPackConcat = webPackVarStr + '\n' + webPackConfigStrWrap;
+          fs.writeFileSync(mergeFile, webPackConcat, 'utf-8');
+          const mergeData = fs.readFileSync(mergeFile, "utf-8")
+                  .replace(/"@(\/\\)(\\)(\S*)"/g, "$1$3")
+                  .replace(/"@(\/\S*)"/g, "$1")     // 处理"@/node_modules/"
+                  .replace(/"<%/g, '')
+                  .replace(/%>"/g, '');
+          fs.writeFileSync(mergeFile, mergeData, 'utf-8');
+
       })
       .catch((err) => {
           console.log("err:", err);

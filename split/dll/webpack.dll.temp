@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '../');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const Libs = {
     // ui: ['antd'],
@@ -11,6 +10,7 @@ const Libs = {
 
 const isProEnv = process.env.NODE_ENV === 'production';
 const outputPath = isProEnv ? path.resolve(ROOT, '{{buildDir}}') : path.resolve(ROOT, '{{devDir}}'); 
+const outDir = idProEnv ? '{{buildDir}}' : '{{devDir}}';
 
 const DllConfig = {
     entry: {...Libs},
@@ -29,6 +29,10 @@ const DllConfig = {
             name: '[name]',
             context: ROOT
         }),
+        new AddAssetHtmlPlugin([
+            { filepath: require.resolve(`../${outDir}/base`), includeSourcemap: false, hash: true },
+            { filepath: require.resolve(`../${outDir}/frame`), includeSourcemap: false, hash: true },
+        ]),
     ],
     resolve: {
         extensions: ['.js', '.jsx']
