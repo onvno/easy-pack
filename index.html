@@ -29,13 +29,13 @@
           <!--选择目录  -->
           <div>
               <label class="label-tit" for="dirSelect">项目路径</label>
-              <input id="dirSelect" value="/Users/AYA/Desktop" />
+              <input type="text" id="dirSelect" value="/Users/AYA/Desktop" />
           </div>
 
           <div>
               <!-- 项目名称 -->
               <label class="label-tit" for="project">项目名称</label>
-              <input id="project" />
+              <input type="text" id="project" />
           </div>
       </div>
 
@@ -63,19 +63,19 @@
         <div>
           <div>
               <label class="label-tit" for="baseAry">基本依赖</label>
-              <input id="baseAry" value="lodash,immutable" />
+              <input type="text" id="baseAry" value="lodash,immutable" />
           </div>
           <div>
               <label class="label-tit" for="frameAry">框架依赖</label>
-              <input id="frameAry" value="react,react-dom" />
+              <input type="text" id="frameAry" value="react,react-dom" />
           </div>
           <div>
               <label class="label-tit" for="buildDir">build目录</label>
-              <input id="buildDir" value="dist" />
+              <input type="text" id="buildDir" value="dist" />
           </div>
           <div>
               <label class="label-tit" for="devDir">dev目录</label>
-              <input id="devDir" value="dev" />
+              <input type="text" id="devDir" value="dev" />
           </div>
         </div>
       </div>
@@ -98,7 +98,6 @@
 
     <script>
       // You can also require other files to run in this process
-      require('./renderer.js')
       require('./form.js')
     </script>
   </body>

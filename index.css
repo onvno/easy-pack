@@ -31,6 +31,9 @@ input{
     color:#999;
     outline: none;
 }
+input[type="text"]{
+    width: 250px;
+}
 h4{
     margin-top: 0;
     font-weight: lighter;
