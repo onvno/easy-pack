@@ -1,0 +1,21 @@
+{
+    "name": "easy-pack",
+    "version": "1.0.0",
+    "description": "每个人心中都有一套属于自己的工程构建/滑稽脸",
+    "scripts": {
+        "start": "node bin/devServer",
+        "dll": "webpack --progress -d --hide-modules --config ./config/webpack.dll.js",
+        "build_pack": "node bin/build",
+        "build_dll": "cross-env NODE_ENV=production webpack --sort-assets-by 'size' --progress -p --hide-modules --config ./config/webpack.dll.js",
+        "clean": "rm -rf ./dist/*",
+        "build": "npm run clean && npm run build_dll && npm run build_pack"
+    },
+    "author": "onvno (https://github.com/onvno)",
+    "devDependencies": {
+        "webpack": "^3.11.0",
+        "webpack-dev-middleware": "^2.0.6",
+        "webpack-dev-server": "^2.11.2",
+        "webpack-hot-middleware": "^2.22.1",
+        "webpack-merge": "^4.1.2"
+    }
+}
