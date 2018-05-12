@@ -31,7 +31,6 @@ function rendering() {
     }
 };
 subscribe(rendering)
-baseRender(dispatch);
 
 const EasyRoot = process.cwd(); //运行环境根目录
 let ProjectDir; //输出项目目录
@@ -77,6 +76,11 @@ ipc.on('custom', function (event, arg) {
         const globalPath = path.resolve(ProjectPath, 'bin/constant.json');
         fs.writeFileSync(globalPath, JSON.stringify(global, null, 4), 'utf-8');
     }
+
+    /**
+     * 基本配置
+     */
+    baseRender(dispatch);
 
     /**
      * opt - 类型处理

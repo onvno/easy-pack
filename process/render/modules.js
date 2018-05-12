@@ -18,7 +18,13 @@ const moduleRender = (name, state, part, dispatch) => {
         payload: {
             Packages: merge(Packages, packJSON),
             Vars: merge(Vars, packVarConfig.var),
-            Configs: merge(Configs, packVarConfig.config),
+            Configs: merge.strategy(
+                {
+                    entry: 'replace', // or 'replace', defaults to 'append'
+                    plugins: 'replace',
+                    'module.loaders': 'replace'
+                }
+            )(Configs, packVarConfig.config),
         }
     })
 }
