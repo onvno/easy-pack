@@ -1,6 +1,9 @@
+html{
+    background: #2086d7;
+}
 body{
     width:350px;
-    height:650px;
+    height:745px;
     float:left;
     background: #eee;
     font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
