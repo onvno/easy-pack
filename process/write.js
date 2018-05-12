@@ -38,6 +38,7 @@ const writeFile = (state , ProjectPath, dispatch) => {
     fs.writeFileSync(mergeFile, webPackConcat, 'utf-8');
     const mergeData = fs.readFileSync(mergeFile, "utf-8")
             .replace(/"@(\/\\)(\\)(\S*)"/g, "$1$3")
+            .replace(/\\\?/g,"\?") // 处理字体双斜杠/\.(eot|ttf|woff|woff2|svg|svgz)(\\?.+)?$/
             .replace(/"@(\/\S*)"/g, "$1")     // 处理"@/node_modules/"
             .replace(/"<%/g, '')
             .replace(/%>"/g, '');
