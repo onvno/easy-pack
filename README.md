@@ -12,6 +12,7 @@
 * 引入dll,添加package.json - 目前采用最新版本。 以后可改进为默认最新，可选择填写粗版本号 👌
 * package基本信息 👌
 * server - proxy & mock 👌
+* dll模块内isProd判断缺少全局变量
 
 #### 思考全局变量
 

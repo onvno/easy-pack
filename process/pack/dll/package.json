@@ -1,0 +1,5 @@
+{
+    "devDependencies": {
+        "add-asset-html-webpack-plugin": "^2.1.3"
+    }
+}

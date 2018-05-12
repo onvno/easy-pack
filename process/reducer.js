@@ -1,8 +1,8 @@
 const initState = {
-    packages: '',
-    vars: '',
-    configs: '',
-    base: 0
+    Packages: {},
+    Vars: {},
+    Configs: {},
+    DLLCount: 0
 }
 
 const TYPES = {
