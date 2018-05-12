@@ -6,6 +6,8 @@ const path = require('path');
 const merge = require('webpack-merge');
 const Util = require('./utils.js');
 const { TYPES } = require('./reducer.js');
+const beautify = require('js-beautify').js_beautify;
+
 
 const writeFile = (state , ProjectPath, dispatch) => {
     const {Packages, Vars, Configs} = state;
@@ -39,7 +41,8 @@ const writeFile = (state , ProjectPath, dispatch) => {
             .replace(/"@(\/\S*)"/g, "$1")     // 处理"@/node_modules/"
             .replace(/"<%/g, '')
             .replace(/%>"/g, '');
-    fs.writeFileSync(mergeFile, mergeData, 'utf-8');
+    const beautifyData = beautify(mergeData, { indent_size: 4 });
+    fs.writeFileSync(mergeFile, beautifyData, 'utf-8');
 
     dispatch({
         type: TYPES.update,
