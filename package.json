@@ -4,7 +4,8 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron --inspect=5858 ."
+    "start": "electron --inspect=5858 .",
+    "build": "electron-packager . EasyPack --out /Users/AYA/desktop --overwrite --icon ./static/easypack"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
