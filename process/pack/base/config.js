@@ -14,7 +14,7 @@ module.exports.config = {
     },
     output: {
         path: "<%path.resolve(ROOT, 'dev')%>",
-        filename: '[name].[chunkhash:5].js',
+        filename: '[name].[hash:5].js',
         publicPath: '/'
     },
     resolve: {
@@ -28,12 +28,5 @@ module.exports.config = {
         }
     },
     externals: {},
-    plugins: [
-        "<%new HtmlWebpackPlugin({\
-            filename: 'index.html',\
-            template: './src/index.html',\
-            inject: 'body',\
-            chunks: ['index']\
-        })%>",
-    ]
+    plugins: []
 }

@@ -21,7 +21,8 @@ const moduleRender = (name, state, part, dispatch) => {
             Configs: merge.strategy(
                 {
                     entry: 'replace', // or 'replace', defaults to 'append'
-                    plugins: 'replace',
+                    //plugins: 'replace',
+                    // 因为项目中使用了`<%`的字符串，所以默认replace方式不可行，只能通过避免重复书写plugin
                     'module.loaders': 'replace'
                 }
             )(Configs, packVarConfig.config),

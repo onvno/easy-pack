@@ -6,7 +6,6 @@ module.exports.var = {
 
 module.exports.config = {
     plugins: [
-        "<%new OpenBrowserPlugin({url: 'http://localhost:3333'})%>",
         "<%new webpack.DllReferencePlugin({\
             context: ROOT,\
             manifest: require(`../${CONST.devDir}/base-manifest.json`),\
