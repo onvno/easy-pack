@@ -8,7 +8,6 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const CONST = require('./constant.json');
 
 // 生产阶段
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const ROOT = path.resolve(__dirname, '../');
 
 module.exports = {
