@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './index.less'
+import './index.css'
 
 let root = document.getElementById('root');
 
