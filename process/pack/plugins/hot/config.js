@@ -1,4 +1,5 @@
 module.exports.var = {
+    webpack : "<%require('webpack')%>",
     hotMiddlewareScript : "webpack-hot-middleware/client?reload=true",
 }
 

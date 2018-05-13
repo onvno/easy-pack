@@ -65,7 +65,7 @@ ipc.on('custom', function (event, arg) {
     /**
      * 拷贝静态资源 & server.js & 全局变量
      */
-    const copyDirPath = path.resolve(EasyRoot, 'copyDir');
+    const copyDirPath = path.resolve(EasyRoot, './process/copy');
     fse.copySync(copyDirPath, ProjectPath);
     fse.copySync(
         path.resolve(EasyRoot, 'server/server.js'),

@@ -7,7 +7,7 @@ module.exports.config = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 include: "<%path.resolve(ROOT, 'src')%>",
-                use: ["cache-loader", "babel-loader"],
+                use: ["babel-loader"],
             },
         ]
     }
