@@ -5,8 +5,8 @@ const path = require('path');
 const Util = require('../utils.js');
 const { TYPES } = require('../reducer.js');
 
-const EasyRoot = process.cwd(); //运行环境根目录
-const PackRoot = path.resolve(process.cwd(), 'process/pack');
+const EasyRoot = process.env['APP_PATH']; //运行环境根目录
+const PackRoot = path.resolve(process.env['APP_PATH'], 'process/pack');
 
 const baseVarConfig = require(path.resolve(PackRoot, './base/config.js'));
 const baseJSON = require(path.resolve(PackRoot,'./base/package.json'));

@@ -6,7 +6,7 @@ const merge = require('webpack-merge');
 const Util = require('../utils.js');
 const { TYPES } = require('../reducer.js');
 
-const EasyRoot = process.cwd(); //运行环境根目录
+const EasyRoot = process.env['APP_PATH']; //运行环境根目录
 
 const moduleRender = (name, state, part, dispatch) => {
     const {Packages, Vars, Configs} = state;

@@ -1,6 +1,5 @@
 const electron = require('electron');
-const app = electron.app
-const BrowserWindow = electron.BrowserWindow
+const { app, protocol, BrowserWindow } = electron;
 
 const path = require('path')
 const url = require('url')
@@ -9,6 +8,7 @@ const ROOTPATH = __dirname;
 let mainWindow
 
 function createWindow () {
+  // mainWindow = new BrowserWindow({width: 800, height: 765})
   mainWindow = new BrowserWindow({width: 350, height: 765})
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
@@ -54,6 +54,9 @@ app.on('activate', function () {
     createWindow()
   }
 })
+
+// console.log("path:", app.getAppPath())
+process.env['APP_PATH'] = app.getAppPath();
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

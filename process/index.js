@@ -11,6 +11,8 @@ const moduleRender = require('./render/modules.js');
 const dllRender = require('./render/dll.js');
 const writeFile = require('./write.js');
 
+// console.log(process.env['APP_PATH']);
+
 const aa = require('./render/base.js');
 const Util = require('./utils.js');
 const {reducers, TYPES} = require('./reducer.js');
@@ -32,7 +34,7 @@ function rendering() {
 };
 subscribe(rendering)
 
-const EasyRoot = process.cwd(); //运行环境根目录
+const EasyRoot = process.env['APP_PATH'];
 let ProjectDir; //输出项目目录
 
 ipc.on('custom', function (event, arg) {
