@@ -1,8 +1,53 @@
-# electron-quick-start
+# EasyPack
+
+欢迎使用EasyPack快速构建工程！
+
+#### 初衷
+
+EasyPack只专注在构建方面
+
+- *效率*：避免重复配置的工作反复做
+- *交互便捷*：简化配置操作，实现可视化操作
+- *人性化*：明确自己的构建可以实现哪些作用，直接暴露配置，方便二次修改
+- *专注开发*
+
+EasyPack本身并不是鼓励大家不去学习webpack，恰恰相反，是希望能在学习后，利用EasyPack快速生成的完美可读性配置进行二次开发，提高效率。
 
 
 
-#### 考虑
+#### 关于脚手架
+
+默认使用`src`作为开发目录。`src`目录下只提供基本的测试demo，不提供完整的脚手架服务，原因有二：
+
+- 每个前端都有一套自己认为合理的目录结构
+- 个人精力有限
+
+#### 配置说明
+
+- 编译类型及插件：已默认勾选常规选项，如`css`,`js`,`图片`,`默认打开浏览器`,`热更新`,`html模板`可选配置可根据项目自行勾选
+
+- 默认使用了DLL这一比较认可的第三方依赖进行分割的优化。配置可通过`,`填入多个
+
+  考虑到项目中可能依赖的第三方太多，分为两部分：
+
+  - 工具依赖：可以将一些常用的`lodash`,`axios`等工具单独打包
+  - 框架依赖：可以将项目中依赖的框架相关，如`react`,`react-dom`,`redux`,`react-router-dom`等打包
+
+  因为DLL需要指明预编译的文件地址，所以需要针对开发和build指明目录
+
+- 开发服务器，使用了express，可以开启mock 或 proxy代理，关于其如何使用，可以在生成的项目README.md很容易了解到。
+
+
+
+#### TODO
+
+太多要做的，因为项目原因，目前主要是做了react相关的配置
+
+需要提供一些vue项目的配置供参考后添加
+
+
+
+#### 开发过程中问题
 
 * 文本替换使用模板引擎，模板合并:http://handlebarsjs.com/ - dll处使用 - 👌
 * 在执行merge之前，所有依赖path等的路径，必须为字符串，需要做处理 $path如何
@@ -14,51 +59,4 @@
 * server - proxy & mock 👌
 * dll模块内isProd判断缺少全局变量
 
-#### 思考全局变量
 
-
-
-
-**Clone and run for a quick way to see Electron in action.**
-
-This is a minimal Electron application based on the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start) within the Electron documentation.
-
-**Use this app along with the [Electron API Demos](https://electronjs.org/#get-started) app for API code examples to help you get started.**
-
-A basic Electron application needs just these files:
-
-- `package.json` - Points to the app's main file and lists its details and dependencies.
-- `main.js` - Starts the app and creates a browser window to render HTML. This is the app's **main process**.
-- `index.html` - A web page to render. This is the app's **renderer process**.
-
-You can learn more about each of these components within the [Quick Start Guide](https://electronjs.org/docs/tutorial/quick-start).
-
-## To Use
-
-To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
-
-```bash
-# Clone this repository
-git clone https://github.com/electron/electron-quick-start
-# Go into the repository
-cd electron-quick-start
-# Install dependencies
-npm install
-# Run the app
-npm start
-```
-
-Note: If you're using Linux Bash for Windows, [see this guide](https://www.howtogeek.com/261575/how-to-run-graphical-linux-desktop-applications-from-windows-10s-bash-shell/) or use `node` from the command prompt.
-
-## Resources for Learning Electron
-
-- [electronjs.org/docs](https://electronjs.org/docs) - all of Electron's documentation
-- [electronjs.org/community#boilerplates](https://electronjs.org/community#boilerplates) - sample starter apps created by the community
-- [electron/electron-quick-start](https://github.com/electron/electron-quick-start) - a very basic starter Electron app
-- [electron/simple-samples](https://github.com/electron/simple-samples) - small applications with ideas for taking them further
-- [electron/electron-api-demos](https://github.com/electron/electron-api-demos) - an Electron app that teaches you how to use Electron
-- [hokein/electron-sample-apps](https://github.com/hokein/electron-sample-apps) - small demo apps for the various Electron APIs
-
-## License
-
-[CC0 1.0 (Public Domain)](LICENSE.md)
