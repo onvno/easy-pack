@@ -28,19 +28,32 @@
           <h4>创建项目</h4>
           <!--选择目录  -->
           <div>
-              <label class="label-tit" for="dirSelect">项目路径</label>
+              <label class="label-tit" for="dirSelect"><span class="redStar">* </span>项目路径</label>
               <input type="text" id="dirSelect" placeholder="请输入" />
               <!-- <input type="text" id="dirSelect" value="/Users/AYA/Desktop" /> -->
           </div>
 
           <div>
               <!-- 项目名称 -->
-              <label class="label-tit" for="project">项目名称</label>
+              <label class="label-tit" for="project"><span class="redStar">* </span>项目名称</label>
               <input type="text" id="project" placeholder="请输入" />
           </div>
+
+          <p class="describe">- 你我约定:'src'为开发目录，'dist'为build目录</p>
       </div>
 
-  
+      <div class="carding">
+        <h4>框架类型</h4>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="react" class="opt">
+            React
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" value="vue" class="opt">
+            Vue
+        </label>
+      </div>
+
       <div class="carding">
         <h4>编译类型</h4>
         <label class="checkbox-inline">
@@ -77,15 +90,19 @@
         <h4>常用插件</h4> 
         <label class="checkbox-inline">
             <input type="checkbox" value="browser" class="plug" checked=true disabled>
-            打开浏览器
+            OpenBrowser
         </label>
         <label class="checkbox-inline">
             <input type="checkbox" value="hot" class="plug" checked=true disabled>
-            热更新
+            HMR
         </label>
         <label  class="checkbox-inline">
             <input type="checkbox" value="html" class="plug" checked=true disabled>
-            htm模板
+            HtmlWebpack
+        </label>
+        <label  class="checkbox-inline">
+            <input type="checkbox" value="cache" class="plug" />
+            Cacheloader[JS]
         </label>
       </div>
     
@@ -94,33 +111,28 @@
         <label class="checkbox-inline"><input type="checkbox" value="dll" class="split" checked=true>DLL代码分割</label>
         <div>
           <div class="mt5">
-              <label class="label-tit" for="baseAry">工具依赖</label>
-              <input type="text" id="baseAry" value="lodash" placeholder="多个依赖以逗号,分割" />
+              <label class="label-tit label-wide" for="baseAry">工具相关依赖</label>
+              <input class="short" type="text" id="baseAry" value="lodash" placeholder="多个依赖以逗号,分割" />
           </div>
           <div>
-              <label class="label-tit" for="frameAry">框架依赖</label>
-              <input type="text" id="frameAry" value="react,react-dom" placeholder="多个依赖以,分割" />
+              <label class="label-tit label-wide" for="frameAry">框架相关依赖</label>
+              <input class="short" type="text" id="frameAry" value="react,react-dom" placeholder="多个依赖以,分割" />
           </div>
           <div>
-              <label class="label-tit" for="buildDir">build目录</label>
-              <input type="text" id="buildDir" value="dist" />
-          </div>
-          <div>
-              <label class="label-tit" for="devDir">dev目录</label>
-              <input type="text" id="devDir" value="dev" />
+              <label class="label-tit label-wide" for="devDir">DLL开发目录</label>
+              <input class="short" type="text" id="devDir" value="dev" />
           </div>
         </div>
       </div>
     
       <div class="carding">
-        <h4>开发服务器(默认选用了express)</h4>
+        <h4>开发服务器(默认选用express)</h4>
         <div>
             <label class="checkbox-inline">
                 <input type="checkbox" value="browser" id="mock" >
                 是否开启mock
             </label>
             <label class="checkbox-inline"><input type="checkbox" value="browser" id="proxy" checked>是否开启代理</label>
-            <a class="readme">→mock及proxy使用说明</a>
         </div>
       </div>
       

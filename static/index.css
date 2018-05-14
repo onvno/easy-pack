@@ -3,7 +3,7 @@ html{
 }
 body{
     width:350px;
-    height:740px;
+    height:760px;
     float:left;
     background: #eee;
     font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -37,16 +37,26 @@ input{
     border: 0;
     border-bottom: 1px solid #ddd;
     text-indent: 5px;
-    color:#999;
+    color:#333;
     outline: none;
+    font-style: italic;
 }
 input[type="text"]{
-    width: 250px;
+    width: 240px;
+}
+input[type="text"].short{
+    width:200px;
 }
 h4{
     margin-top: 0;
     font-weight: lighter;
 }
+p.describe{
+    font-weight: lighter;
+    margin-bottom:0;
+    margin-top:3px;
+}
+.redStar{ color: red;}
 
 /* title */
 .title{
@@ -56,8 +66,8 @@ h4{
 }
 .title h1{
     margin:0;
-    padding: 20px;
-    font-size: 30px;
+    padding: 18px 20px;
+    font-size: 24px;
     font-weight: lighter;
     text-align: center;
     border-bottom: 1px solid #eee;
@@ -68,7 +78,8 @@ h4{
     margin-right: 15px;
     margin-left: 0px;
     font-weight: lighter;
-    color: #666;
+    color: #333;
+    font-style: italic;
 }
 .checkbox-inline + .checkbox-inline{
     margin-left:0;
@@ -81,7 +92,10 @@ h4{
 }
 
 .label-tit{
-    width: 56px;
+    width: 65px;
+}
+.label-tit.label-wide{
+    width: 90px;
 }
 .readme{
     display: block;

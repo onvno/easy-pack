@@ -7,6 +7,7 @@
 
 // 选择目录
 const electron = require('electron');
+const { buildDir } = require('./constant.js');
 const { shell, ipcRenderer } = electron;
 const { dialog } = electron.remote;
 const os = require('os')
@@ -70,7 +71,6 @@ submit.addEventListener('click', (e) => {
     const frameAryDom = document.getElementById('frameAry');
     frameAry = frameAryDom.value.split(',');
 
-    const buildDir = document.getElementById('buildDir').value;
     const devDir = document.getElementById('devDir').value;
 
     res.dll = {

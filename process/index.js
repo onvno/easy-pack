@@ -83,13 +83,18 @@ ipc.on('custom', function (event, arg) {
      * 基本配置
      */
     baseRender(dispatch);
-
     /**
      * opt - 类型处理
      */
     opt.map(part => {
         moduleRender("modules", getState(), part, dispatch);
+        if(part === 'react') {
+            const babelrcPath = path.resolve(EasyRoot, './process/pack/modules/react/.babelrc');
+            const copyBabelrcPath = path.resolve(ProjectPath, './.babelrc');
+            fse.copySync(babelrcPath, copyBabelrcPath);
+        }
     })
+
 
     /**
      * plugin
