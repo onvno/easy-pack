@@ -38,6 +38,10 @@ EasyPack只专注在构建方面
 - 人性化：直接暴露配置，方便二次修改
 - 更专注开发
 
-![](http://ww1.sinaimg.cn/large/63885f75ly1frbcdzjqswj20ji1a0dkb.jpg)
+
+
+![](http://ww1.sinaimg.cn/large/63885f75ly1frbcliuwonj209q0n2wg5.jpg)
+
+
 
 
