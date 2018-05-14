@@ -1,7 +1,5 @@
 # EasyPack
 
-![](http://ww1.sinaimg.cn/large/63885f75ly1frbchlry6fj205k05k748.jpg)
-
 欢迎使用EasyPack快速构建工程！
 
 #### Start
