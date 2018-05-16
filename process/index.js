@@ -106,7 +106,7 @@ ipc.on('custom', function (event, arg) {
     /**
      * dll处理
      */
-    if(dll) {
+    if(dll.dllStatus) {
         // 模块render
         moduleRender("", getState(), "dll", dispatch);
         const dllDataAry = dll.baseAry.concat(dll.frameAry);

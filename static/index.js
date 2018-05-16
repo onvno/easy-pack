@@ -65,6 +65,7 @@ submit.addEventListener('click', (e) => {
     res.plug = plug
 
     // dll相关
+    const dllStatus = document.querySelector('.dll').checked;
     const baseAryDom = document.getElementById('baseAry');
     baseAry = baseAryDom.value.split(',');
 
@@ -74,6 +75,7 @@ submit.addEventListener('click', (e) => {
     const devDir = document.getElementById('devDir').value;
 
     res.dll = {
+        dllStatus,
         baseAry,
         frameAry,
         buildDir,
