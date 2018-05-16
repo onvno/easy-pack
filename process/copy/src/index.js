@@ -14,7 +14,7 @@
 // es6 demo
 import './index.css';
 let root = document.getElementById('root');
-const innerDom = new Promise((res,rej) => {
+const innerDom = new Promise((resolve,reject) => {
     if (true) {
         resolve("<div>Hello EasyPack!</div>");
     } else {

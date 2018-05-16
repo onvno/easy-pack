@@ -2,6 +2,8 @@ const initState = {
     Packages: {},
     Vars: {},
     Configs: {},
+    VarsProd: {},
+    ConfigsProd: {},
     DLLCount: 0
 }
 

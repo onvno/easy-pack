@@ -8,22 +8,7 @@ const Util = require('./utils.js');
 const { TYPES } = require('./reducer.js');
 const beautify = require('js-beautify').js_beautify;
 
-
-const writeFile = (state , ProjectPath, dispatch) => {
-    const {Packages, Vars, Configs} = state;
-
-    /**
-     * 写入package.json
-     */
-    const mergeJsonFile = path.resolve(ProjectPath, './package.json');
-    const JSONStr = JSON.stringify(Packages, null, 4);
-    fs.writeFileSync(mergeJsonFile, JSONStr, 'utf-8');
-
-
-    /**
-     * 写入webpack文件
-     */
-    const mergeFile = path.resolve(ProjectPath, './config/webpack.config.js');
+const handleData = (mergeFile, Vars, Configs) => {
     const webPackConfigStr = JSON.stringify(Configs, Util.newReplace, 4);
     const webPackConfigStrWrap = `module.exports = ` + webPackConfigStr;
 
@@ -44,13 +29,41 @@ const writeFile = (state , ProjectPath, dispatch) => {
             .replace(/%>"/g, '');
     const beautifyData = beautify(mergeData, { indent_size: 4 });
     fs.writeFileSync(mergeFile, beautifyData, 'utf-8');
+}
 
+const writeFile = (state , ProjectPath, dispatch) => {
+    const {Packages, Vars, Configs, VarsProd, ConfigsProd} = state;
+
+    /**
+     * 写入package.json
+     */
+    const mergeJsonFile = path.resolve(ProjectPath, './package.json');
+    const JSONStr = JSON.stringify(Packages, null, 4);
+    fs.writeFileSync(mergeJsonFile, JSONStr, 'utf-8');
+
+
+    /**
+     * 写入webpack.config.js文件
+     */
+    const mergeFile = path.resolve(ProjectPath, './config/webpack.config.js');
+    handleData(mergeFile, Vars, Configs);
+
+
+    /**
+     * 写入webpack.prod.js文件
+     */
+    const mergeProdFile = path.resolve(ProjectPath, './config/webpack.prod.js');
+    handleData(mergeProdFile, VarsProd, ConfigsProd);
+
+    
     dispatch({
         type: TYPES.update,
         payload: {
             Packages: {},
             Vars: {},
             Configs: {},
+            VarsProd: {},
+            ConfigsProd: {}
         }
     })
 
