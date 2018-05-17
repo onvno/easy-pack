@@ -81,13 +81,21 @@ p.describe{
     top: 50%;
     margin-top: -12px;
 }
-.title:hover a {
+.title #wechat{
+    display: none;
+    position: absolute;
+    left:5px;
+    top: 50%;
+    margin-top: -12px;   
+}
+.title:hover a,.title:hover #wechat {
     display: block;
 }
-.title a img{
+.title img{
     width: 24px;
     height: 24px;
 }
+
 
 /* checkbox */
 .checkbox-inline{
