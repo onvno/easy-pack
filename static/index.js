@@ -12,6 +12,21 @@ const { shell, ipcRenderer } = electron;
 const { dialog } = electron.remote;
 const os = require('os')
 
+const exLinksBtn = document.getElementById('open-ex-links')
+
+
+// 处理链接
+const links = document.querySelectorAll('a[href]')
+Array.prototype.forEach.call(links, function (link) {
+  const url = link.getAttribute('href')
+  if (url.indexOf('http') === 0) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault()
+      shell.openExternal(url)
+    })
+  }
+})
+
 // 打开目录dir
 const fileManagerBtn = document.getElementById('dir')
 fileManagerBtn.addEventListener('click', function (event) {

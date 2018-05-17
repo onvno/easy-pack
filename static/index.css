@@ -60,6 +60,8 @@ p.describe{
 
 /* title */
 .title{
+    position: relative;
+    cursor:pointer;
     margin-bottom: 3px;
     background: #2086d7;
     color: #fff;
@@ -71,6 +73,20 @@ p.describe{
     font-weight: lighter;
     text-align: center;
     border-bottom: 1px solid #eee;
+}
+.title a {
+    display: none;
+    position: absolute;
+    right:5px;
+    top: 50%;
+    margin-top: -12px;
+}
+.title:hover a {
+    display: block;
+}
+.title a img{
+    width: 24px;
+    height: 24px;
 }
 
 /* checkbox */
