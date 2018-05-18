@@ -80,6 +80,30 @@ ipc.on('custom', function (event, arg) {
     }
 
     /**
+     * 拷贝demo
+     */
+    const demoDirPath = path.resolve(EasyRoot, './process/demo');
+    if(opt.includes('react')) {
+        fse.copySync(
+            path.resolve(demoDirPath, 'react'),
+            path.resolve(ProjectPath, 'src')
+        )
+    }
+    else if(opt.includes('vue')) {
+        fse.copySync(
+            path.resolve(demoDirPath, 'vue'),
+            path.resolve(ProjectPath, 'src')
+        )
+    }
+    else {
+        fse.copySync(
+            path.resolve(demoDirPath, 'es6'),
+            path.resolve(ProjectPath, 'src')
+        )
+    }
+
+
+    /**
      * 基本配置
      */
     baseRender(dispatch);

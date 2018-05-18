@@ -10,8 +10,8 @@ const Libs = {
 }
 
 const isProEnv = process.env.NODE_ENV === 'production';
-const outputPath = isProEnv ? path.resolve(ROOT, '{{buildDir}}') : path.resolve(ROOT, '{{devDir}}'); 
-const outDir = isProEnv ? '{{buildDir}}' : '{{devDir}}';
+const outputPath = isProEnv ? path.resolve(ROOT, '{{buildDir}}') : path.resolve(ROOT, '{{devDllDir}}'); 
+const outDir = isProEnv ? '{{buildDir}}' : '{{devDllDir}}';
 
 const DllConfig = {
     entry: {...Libs},

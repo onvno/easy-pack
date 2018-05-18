@@ -7,7 +7,7 @@
 
 // 选择目录
 const electron = require('electron');
-const { buildDir } = require('./constant.js');
+const { buildDir, devDllDir } = require('./constant.js');
 const { shell, ipcRenderer } = electron;
 const { dialog } = electron.remote;
 const os = require('os')
@@ -87,14 +87,13 @@ submit.addEventListener('click', (e) => {
     const frameAryDom = document.getElementById('frameAry');
     frameAry = frameAryDom.value.split(',');
 
-    const devDir = document.getElementById('devDir').value;
 
     res.dll = {
         dllStatus,
         baseAry,
         frameAry,
         buildDir,
-        devDir,
+        devDllDir,
     }
 
     // 服务器配置相关
@@ -104,7 +103,7 @@ submit.addEventListener('click', (e) => {
         mock: mockStatus,
         proxy: proxyStatus,
         buildDir,
-        devDir
+        devDllDir
     }
     res.global = global;
 

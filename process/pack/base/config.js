@@ -18,7 +18,7 @@ module.exports.config = {
         publicPath: '/'
     },
     resolve: {
-        extensions: [".jsx", ".js", ".tsx", ".ts"],
+        extensions: [".jsx", ".js", ".tsx", ".ts", ".vue"],
         alias: {
             src: "<%path.resolve(ROOT, 'src')%>",
             components: "<%path.resolve(ROOT, 'src/components')%>",
