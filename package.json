@@ -1,7 +1,7 @@
 {
-  "name": "electron-quick-start",
+  "name": "EasyPack",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Easy to Set Webpack Config",
   "main": "main.js",
   "scripts": {
     "start": "electron --inspect=5858 .",
