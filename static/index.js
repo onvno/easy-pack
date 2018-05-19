@@ -27,6 +27,26 @@ Array.prototype.forEach.call(links, function (link) {
   }
 })
 
+
+// 处理dll可编辑与否
+const dllDOM = document.querySelector('.dll');
+dllDOM.addEventListener('click', (e) => {
+    const checkStatus = e.target.checked;
+    const baseAryDOM = document.getElementById('baseAry');
+    const frameAry = document.getElementById('frameAry');
+
+    console.log("checkStatus:", checkStatus);
+
+    if(checkStatus){
+        baseAryDOM.disabled = false;
+        frameAry.disabled = false;
+    } else {
+        baseAryDOM.disabled = true;
+        frameAry.disabled = true;
+    }
+})
+
+
 // 打开目录dir
 const fileManagerBtn = document.getElementById('dir')
 fileManagerBtn.addEventListener('click', function (event) {
@@ -122,7 +142,7 @@ submit.addEventListener('click', (e) => {
 })
 
 ipcRenderer.on('customReply', function (event, arg) {
-    const message = `创建结果: ${arg}`
+    const message = `结果: ${arg}`
 
     const replayDOM = document.getElementById('reply');
     const loaderDOM = document.getElementById('loading');

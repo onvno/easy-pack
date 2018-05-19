@@ -52,6 +52,10 @@ input[type="text"]{
 input[type="text"].short{
     width:200px;
 }
+input[type="text"]:disabled{
+    background: rgb(229, 229, 229);
+    color: rgb(229,229,229);
+}
 h4{
     margin-top: 0;
     font-weight: lighter;

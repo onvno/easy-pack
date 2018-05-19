@@ -52,8 +52,6 @@ ipc.on('custom', function (event, arg) {
      * 赋值全局常量
      */
     ProjectPath = path.resolve(dirSelect, project)
-    console.log("ProjectPath:", ProjectPath);
-    console.log('nodefs:', fs.existsSync(ProjectPath));
 
     /**
      * 创建项目目录
