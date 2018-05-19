@@ -6,6 +6,7 @@
     <title>Easy Pack</title>
     <link rel="stylesheet" href="./static/bootstrap.css">
     <link rel="stylesheet" href="./static/index.css">
+    <!-- <link rel="stylesheet" href="./static/loaders.css"> -->
   </head>
   <body>
     <!-- All of the Node.js APIs are available in this renderer process. -->
@@ -15,9 +16,16 @@
 
     <div class="wrap">
       <div class="title">
-          <h1>Easy Pack</h1>
-          <a id="github" href="https://github.com/onvno/easy-pack"><img src="./static/github.png" alt=""></a>
-          <span id="wechat"><img src="./static/wechat.png" alt=""></span>
+            <h1>Easy Pack</h1>
+            <a class="github" href="https://github.com/onvno/easy-pack">
+                <img class="icon" src="./static/github.png" alt="">
+            </a>
+            <div class="qq">
+                <img class="icon" src="./static/qq.png" alt="">
+                <div class="qqgroup">
+                    <img src="./static/qqgroup.png" alt="">
+                </div>
+            </div>
       </div>
 
       <!-- 目录 -->
@@ -134,9 +142,19 @@
         </div>
       </div>
       
-      <div class="carding pad10">
-          <input type="button" id="submit" value="创建"/>
-          <div id="reply">前端, 总该对自己好一点, Easy Pack !</div>
+      <div class="carding pad10 create-card">
+        <!-- <input type="button" id="submit" value="创建"/> -->
+        <div id="submit">创建</div>
+        <div id="reply" class="show">总要对自己好一点，Easy Pack !</div>
+        <div id="loading" class="hide">
+            <div class="loader-inner line-scale-pulse-out-rapid">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
       </div>
     </div>
 

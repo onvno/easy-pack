@@ -52,13 +52,14 @@ ipc.on('custom', function (event, arg) {
      * 赋值全局常量
      */
     ProjectPath = path.resolve(dirSelect, project)
-
+    console.log("ProjectPath:", ProjectPath);
+    console.log('nodefs:', fs.existsSync(ProjectPath));
 
     /**
      * 创建项目目录
      */
-    if(Util.fsExistsSync(ProjectPath)){
-        event.sender.send('customReply', '当前目录项目已存在，请重新创建');
+    if(fs.existsSync(ProjectPath)){
+        event.sender.send('customReply', '目录已存在，请三思');
         return 
     }
     fse.ensureDirSync(ProjectPath);

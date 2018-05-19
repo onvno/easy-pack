@@ -3,7 +3,7 @@ html{
 }
 body{
     width:350px;
-    height:760px;
+    height:778px;
     float:left;
     background: #eee;
     font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -30,6 +30,11 @@ body{
 .carding.pad10{
     padding:10px 15px;
 }
+
+.carding.create-card{
+    background: #2086d7;
+}
+
 label, input{
     font-weight: lighter;
 }
@@ -60,11 +65,12 @@ p.describe{
 
 /* title */
 .title{
+    cursor: default;
     position: relative;
-    cursor:pointer;
     margin-bottom: 3px;
     background: #2086d7;
     color: #fff;
+    
 }
 .title h1{
     margin:0;
@@ -74,26 +80,51 @@ p.describe{
     text-align: center;
     border-bottom: 1px solid #eee;
 }
+.title .github, .title .qq{
+    cursor: pointer;
+}
 .title a {
-    display: none;
+    transition:opacity 1s;
+    visibility: hidden;
+    opacity: 0;
     position: absolute;
     right:5px;
     top: 50%;
     margin-top: -12px;
 }
-.title #wechat{
-    display: none;
+.title .qq{
+    transition:opacity 1s;
+    visibility: hidden;
+    opacity: 0;
     position: absolute;
     left:5px;
     top: 50%;
     margin-top: -12px;   
 }
-.title:hover a,.title:hover #wechat {
+.title:hover a,.title:hover .qq {
+    visibility: visible;
+    opacity: 1;
     display: block;
 }
-.title img{
+.title img.icon{
     width: 24px;
     height: 24px;
+}
+.title:hover .qq .qqgroup{
+    position: absolute;
+    z-index:9;
+    transition:opacity .5s;
+    visibility: hidden;
+    opacity: 0;
+    left:0;
+    top: 24px;
+}
+.title:hover .qq .qqgroup img{
+    width:200px;
+}
+.title:hover .qq:hover .qqgroup{
+    visibility: visible;
+    opacity: 1;
 }
 
 
@@ -127,7 +158,7 @@ p.describe{
     font-weight: lighter;
 }
 
-#submit{
+/* #submit{
     float:left;
     width: 40px;
     text-align: center;
@@ -136,7 +167,29 @@ p.describe{
     border-radius: 60px;
     color: #fff;
     background: #2086d7;
+} */
+#submit{
+    float: left;
+    width: 50px;
+    height: 30px;
+    border: 1px solid #fff;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 3px;
+    margin-top: 5px;
+    font-weight:lighter;
+    cursor:pointer;
+    transition: all 0.5s;
 }
+#submit:hover{
+    background: #fff;
+    color: #2086d7;
+}
+
+/* #submit:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+} */
 
 #reply{
     float:left;
@@ -144,4 +197,65 @@ p.describe{
     line-height: 40px;
     font-weight:lighter;
     margin-left: 5px;
+    color: #fff;
+    margin-left: 20px;
 }
+
+
+/* loading */
+#loading{
+    margin-top: 6px;
+    margin-bottom: 6px;
+    width: 310px;
+    padding-left: 40px;
+    box-sizing: border-box;
+    text-align: center;
+}
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
+
+@-webkit-keyframes line-scale-pulse-out-rapid {
+    0% {
+      -webkit-transform: scaley(1);
+              transform: scaley(1); }
+    80% {
+      -webkit-transform: scaley(0.3);
+              transform: scaley(0.3); }
+    90% {
+      -webkit-transform: scaley(1);
+              transform: scaley(1); } }
+  
+  @keyframes line-scale-pulse-out-rapid {
+    0% {
+      -webkit-transform: scaley(1);
+              transform: scaley(1); }
+    80% {
+      -webkit-transform: scaley(0.3);
+              transform: scaley(0.3); }
+    90% {
+      -webkit-transform: scaley(1);
+              transform: scaley(1); } }
+  
+  .line-scale-pulse-out-rapid > div {
+    background-color: #fff;
+    width: 1px;
+    height: 24px;
+    border-radius: 2px;
+    margin: 2px;
+    -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-animation: line-scale-pulse-out-rapid 0.9s -0.5s infinite cubic-bezier(0.11, 0.49, 0.38, 0.78);
+            animation: line-scale-pulse-out-rapid 0.9s -0.5s infinite cubic-bezier(0.11, 0.49, 0.38, 0.78); }
+    .line-scale-pulse-out-rapid > div:nth-child(2), .line-scale-pulse-out-rapid > div:nth-child(4) {
+      -webkit-animation-delay: -0.25s !important;
+              animation-delay: -0.25s !important; }
+    .line-scale-pulse-out-rapid > div:nth-child(1), .line-scale-pulse-out-rapid > div:nth-child(5) {
+      -webkit-animation-delay: 0s !important;
+              animation-delay: 0s !important; }
+  

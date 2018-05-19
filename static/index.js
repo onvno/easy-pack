@@ -108,10 +108,32 @@ submit.addEventListener('click', (e) => {
     res.global = global;
 
 
-    ipcRenderer.send('custom', res)
+    // send消息 & loading
+    const replayDOM = document.getElementById('reply');
+    const loaderDOM = document.getElementById('loading');
+    replayDOM.classList.remove('show');
+    replayDOM.classList.add('hide');
+    loaderDOM.classList.remove('hide');
+    loaderDOM.classList.add('show');
+
+    ipcRenderer.send('custom', res);
+    
+
 })
 
 ipcRenderer.on('customReply', function (event, arg) {
-    const message = `异步消息回复: ${arg}`
-    document.getElementById('reply').innerHTML = message
+    const message = `创建结果: ${arg}`
+
+    const replayDOM = document.getElementById('reply');
+    const loaderDOM = document.getElementById('loading');
+    replayDOM.innerHTML = message;
+    setTimeout(()=>{
+        replayDOM.classList.remove('hide');
+        replayDOM.classList.add('show');
+        loaderDOM.classList.remove('show');
+        loaderDOM.classList.add('hide');
+        setTimeout(() => {
+            replayDOM.innerHTML = '继续对自己好一点，Easy Pack !'
+        }, 5000);
+    }, 1000)
 })

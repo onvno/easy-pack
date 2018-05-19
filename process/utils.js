@@ -1,5 +1,6 @@
 /**
  * 判断路径是否存在
+ * 遗弃：部分情况判断错误
  * @param {String} path 
  */
 function fsExistsSync(path) {
