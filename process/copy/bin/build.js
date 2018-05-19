@@ -13,6 +13,6 @@ webpack(prodConfig, function (err, stats) {
         colors: true
       }));
     } else {
-      cconsole.log("err:", err);
+      console.log("err:", err);
     }
 });
