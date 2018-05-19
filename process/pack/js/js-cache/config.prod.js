@@ -1,4 +1,7 @@
-module.exports.var = {}
+module.exports.var = {
+    path : "<%require('path')%>",
+    ROOT : "<%path.resolve(__dirname, '../')%>"
+}
 
 module.exports.config = {
     module: {
@@ -8,7 +11,7 @@ module.exports.config = {
                 exclude: /node_modules/,
                 include: "<%path.resolve(ROOT, 'src')%>",
                 use: ["babel-loader"],
-            },
+            }
         ]
     }
 }

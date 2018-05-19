@@ -3,32 +3,7 @@ module.exports.var = {
     STATIC : "/"
 };
 
-module.exports.config.css = {
-    module: {
-        rules: [
-            {
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader', 'postcss-loader']
-			}
-        ]
-    }
-};
-
-module.exports.config.scss = {
-    module: {
-        rules: [{
-            test: /\.scss$/,
-            use: [
-                "style-loader", // creates style nodes from JS strings
-                "css-loader", // translates CSS into CommonJS
-                "postcss-loader",
-                "sass-loader" // compiles Sass to CSS
-            ]
-        }]
-    }
-}
-
-module.exports.config.less = {
+module.exports.config = {
     module: {
         rules: [
             {

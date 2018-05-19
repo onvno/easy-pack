@@ -72,6 +72,8 @@ submit.addEventListener('click', (e) => {
     let res = {};
     let opt = [];
     let plug = [];
+    let style = [];
+    let js = [];
 
     // 目录
     const dirDom = document.getElementById('dirSelect');
@@ -80,6 +82,26 @@ submit.addEventListener('click', (e) => {
     // 项目名
     const projectDom = document.getElementById('project');
     res.project = projectDom.value;
+
+    // style集合
+    const styleDom = document.querySelectorAll('.style');
+    for(let sd=0; sd<styleDom.length; sd++) {
+        if(styleDom[sd].checked === true) {
+            style.push(styleDom[sd].value)
+        }
+    }
+    res.style = style;
+
+    
+    // js集合
+    const jsDom = document.querySelectorAll('.jsdom');
+    for(let jd=0; jd<jsDom.length; jd++) {
+        if(jsDom[jd].checked === true) {
+            js.push(jsDom[jd].value)
+        }
+    }
+    res.js = js;
+
 
     // rules集合
     const optDoms = document.querySelectorAll('.opt');

@@ -41,6 +41,8 @@ ipc.on('custom', function (event, arg) {
     const {
         dirSelect, // 项目目录
         project, // 项目名称
+        style, //样式相关
+        js, //js相关
         opt, // 编译文件类型
         plug, // 插件
         dll, // dll
@@ -57,7 +59,7 @@ ipc.on('custom', function (event, arg) {
      * 创建项目目录
      */
     if(fs.existsSync(ProjectPath)){
-        event.sender.send('customReply', '目录已存在，请三思');
+        event.sender.send('customReply', '项目已存在，请重新输入目录');
         return 
     }
     fse.ensureDirSync(ProjectPath);
@@ -101,11 +103,61 @@ ipc.on('custom', function (event, arg) {
         )
     }
 
-
     /**
      * 基本配置
      */
     baseRender(dispatch);
+
+
+    /**
+     * style - 样式处理 & 拷贝postcss.config
+     */
+    if(style.includes('postcss')){
+        fse.copySync(
+            path.resolve(EasyRoot, 'process/pack/style/postcss.config.js'),
+            path.resolve(ProjectPath, 'postcss.config.js')
+        );
+    }
+    const handleStyle = (styleAry) => {
+        let styleParseAry;
+        if(styleAry.includes('postcss')){
+            styleAry.splice(styleAry.indexOf('postcss'), 1);
+            styleParseAry = styleAry.map((item) => {
+                return item + '-post';
+            })
+        } else {
+            styleParseAry = styleAry;
+        }
+
+        styleParseAry.map((part) => {
+            moduleRender("style", getState(), part, dispatch);
+        })
+
+    }
+    handleStyle(style);
+
+
+    /**
+     * js - js处理
+     */
+    const handleJS = (jsAry) => {
+        let jsParseAry;
+        if(jsAry.includes('cache')){
+            jsAry.splice(jsAry.indexOf('cache'), 1);
+            jsParseAry = jsAry.map((item) => {
+                return item + '-cache'
+            })
+        } else {
+            jsParseAry = jsAry;
+        }
+
+        jsParseAry.map((part) => {
+            moduleRender("js", getState(), part, dispatch);
+        })
+    }
+    handleJS(js);
+
+
     /**
      * opt - 类型处理
      */

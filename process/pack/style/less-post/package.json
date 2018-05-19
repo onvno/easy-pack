@@ -1,0 +1,9 @@
+{
+    "devDependencies": {
+        "less": "^3.0.1",
+        "less-loader": "^4.1.0",
+        "cssnano": "^3.10.0",
+        "autoprefixer": "^8.3.0",
+        "postcss-loader": "^2.1.4"
+    }
+}

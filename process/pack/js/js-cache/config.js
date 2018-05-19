@@ -1,8 +1,8 @@
 module.exports.var = {
-    OpenBrowserPlugin : "<%require('open-browser-webpack-plugin')%>",
+    path : "<%require('path')%>",
+    ROOT : "<%path.resolve(__dirname, '../')%>"
 }
 
-// 没考虑ts的情况
 module.exports.config = {
     module: {
         rules: [
