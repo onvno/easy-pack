@@ -48,6 +48,7 @@ input{
 }
 input[type="text"]{
     width: 240px;
+    letter-spacing: 0.5px;
 }
 input[type="text"].short{
     width:200px;
@@ -145,6 +146,7 @@ p.describe{
 }
 .radio-inline, .checkbox-inline{
     padding-left: 15px;
+    letter-spacing: 0.5px;
 }
 .checkbox-inline input[type="checkbox"]{
     margin-left: -15px;
