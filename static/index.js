@@ -11,6 +11,7 @@ const { buildDir, devDllDir } = require('./constant.js');
 const { shell, ipcRenderer } = electron;
 const { dialog } = electron.remote;
 const os = require('os')
+const Util = require('../process/utils.js');
 
 const exLinksBtn = document.getElementById('open-ex-links')
 
@@ -124,10 +125,10 @@ submit.addEventListener('click', (e) => {
     // dll相关
     const dllStatus = document.querySelector('.dll').checked;
     const baseAryDom = document.getElementById('baseAry');
-    baseAry = baseAryDom.value.split(',');
+    baseAry = Util.arrayTrim(baseAryDom.value.split(','));
 
     const frameAryDom = document.getElementById('frameAry');
-    frameAry = frameAryDom.value.split(',');
+    frameAry = Util.arrayTrim(frameAryDom.value.split(','));
 
 
     res.dll = {

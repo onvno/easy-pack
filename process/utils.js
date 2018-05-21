@@ -28,8 +28,24 @@ function newReplace(key, value) {
         return value;
 }
 
+/**
+ * 数组去除空值
+ */
+function arrayTrim(arr){  
+    const temp = [];
+    arr.map((item) => {
+        const trimStr = item.trim();
+        if(trimStr.length > 0) {
+            temp.push(trimStr)
+        }
+    })
+    return temp;  
+}
+
 
 module.exports = {
     fsExistsSync: fsExistsSync,
-    newReplace: newReplace
+    newReplace: newReplace,
+    arrayTrim: arrayTrim,
 };
+
