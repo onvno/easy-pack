@@ -1,4 +1,5 @@
-const ipc = require('electron').ipcMain
+const ipc = require('electron').ipcMain;
+const dialog = require('electron').dialog;
 const fse = require('fs-extra');
 const fs = require('fs');
 const path = require('path')
@@ -10,6 +11,7 @@ const baseRender = require('./render/base.js');
 const moduleRender = require('./render/modules.js');
 const dllRender = require('./render/dll.js');
 const writeFile = require('./write.js');
+
 
 // console.log(process.env['APP_PATH']);
 
@@ -36,6 +38,14 @@ subscribe(rendering)
 
 const EasyRoot = process.env['APP_PATH'];
 let ProjectDir; //输出项目目录
+
+/**
+ * 错误处理
+ */
+ipc.on('open-error-dialog', function (event) {
+    dialog.showErrorBox('出错了', '开启DLL的情况,需要填写至少一个依赖')
+})
+
 
 ipc.on('custom', function (event, arg) {
     const {

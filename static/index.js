@@ -36,7 +36,7 @@ dllDOM.addEventListener('click', (e) => {
     const baseAryDOM = document.getElementById('baseAry');
     const frameAry = document.getElementById('frameAry');
 
-    console.log("checkStatus:", checkStatus);
+    // console.log("checkStatus:", checkStatus);
 
     if(checkStatus){
         baseAryDOM.disabled = false;
@@ -75,6 +75,26 @@ submit.addEventListener('click', (e) => {
     let plug = [];
     let style = [];
     let js = [];
+
+    // dll相关
+    const dllStatus = document.querySelector('.dll').checked;
+    const baseAryDom = document.getElementById('baseAry');
+    baseAry = Util.arrayTrim(baseAryDom.value.split(','));
+
+    const frameAryDom = document.getElementById('frameAry');
+    frameAry = Util.arrayTrim(frameAryDom.value.split(','));
+
+    if(dllStatus && (baseAry.length === 0 || frameAry.length === 0)){
+        ipcRenderer.send('open-error-dialog');
+        return;
+    }
+    res.dll = {
+        dllStatus,
+        baseAry,
+        frameAry,
+        buildDir,
+        devDllDir,
+    }
 
     // 目录
     const dirDom = document.getElementById('dirSelect');
@@ -122,22 +142,6 @@ submit.addEventListener('click', (e) => {
     }
     res.plug = plug
 
-    // dll相关
-    const dllStatus = document.querySelector('.dll').checked;
-    const baseAryDom = document.getElementById('baseAry');
-    baseAry = Util.arrayTrim(baseAryDom.value.split(','));
-
-    const frameAryDom = document.getElementById('frameAry');
-    frameAry = Util.arrayTrim(frameAryDom.value.split(','));
-
-
-    res.dll = {
-        dllStatus,
-        baseAry,
-        frameAry,
-        buildDir,
-        devDllDir,
-    }
 
     // 服务器配置相关
     const mockStatus = document.getElementById('mock').checked;
