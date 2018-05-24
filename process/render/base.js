@@ -2,6 +2,7 @@
  * 处理基本配置
  */
 const path = require('path');
+const merge = require('webpack-merge');
 const Util = require('../utils.js');
 const { TYPES } = require('../reducer.js');
 
@@ -12,11 +13,13 @@ const baseVarConfig = require(path.resolve(PackRoot, './base/config.js'));
 const baseVarConfigProd = require(path.resolve(PackRoot, './base/config.prod.js'));
 const baseJSON = require(path.resolve(PackRoot,'./base/package.json'));
 
-const baseRender = (dispatch) => {
+const baseRender = (dispatch, state) => {
+    const {Packages} = state;
     dispatch({
         type: TYPES.update,
         payload: {
-            Packages: baseJSON,
+            Packages: merge(Packages, baseJSON),
+            // Packages: baseJSON,
             Vars: baseVarConfig.var,
             Configs: baseVarConfig.config,
             VarsProd: baseVarConfigProd.var,

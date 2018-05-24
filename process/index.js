@@ -76,7 +76,7 @@ ipc.on('custom', function (event, arg) {
   
 
     /**
-     * 拷贝静态资源 & server.js & 全局变量
+     * 拷贝静态资源 & server.js & 全局变量 & packjson写入
      */
     const copyDirPath = path.resolve(EasyRoot, './process/copy');
     fse.copySync(copyDirPath, ProjectPath);
@@ -84,6 +84,13 @@ ipc.on('custom', function (event, arg) {
         path.resolve(EasyRoot, 'server/server.js'),
         path.resolve(ProjectPath, 'bin/server.js')
     );
+    const serverPackJSON = require(path.resolve(EasyRoot,`server/package.json`));
+    dispatch({
+        type: TYPES.update,
+        payload: {
+            Packages: serverPackJSON
+        }
+    })
 
     if(global) {
         const globalPath = path.resolve(ProjectPath, 'config/constant.json');
@@ -116,7 +123,7 @@ ipc.on('custom', function (event, arg) {
     /**
      * 基本配置
      */
-    baseRender(dispatch);
+    baseRender(dispatch, getState());
 
 
     /**
