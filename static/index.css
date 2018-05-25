@@ -16,6 +16,10 @@ body{
 .hide{
     display: none;
 }
+#tabWrap li{
+    cursor: pointer;
+}
+
 .wrap{
     /* background: #fff;
     padding: 0 15px; */

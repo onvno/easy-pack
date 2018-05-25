@@ -189,7 +189,7 @@
                 <input type="text" id="project" placeholder="请输入" />
             </div>
   
-            <p class="describe">- 约定:'src'开发目录,'dist'打包目录,'dev'预编译目录</p>
+            <p class="describe">- 约定:'src'开发目录,'dist'打包目录</p>
         </div>
   
         <div class="carding">
@@ -261,18 +261,9 @@
         </div>
       
         <div class="carding">
-          <h4>可选:预编译DLL</h4>
-          <label class="checkbox-inline"><input type="checkbox" value="dll" class="dll" checked=true>DLL代码分割:依赖参考见下，以逗号`,`分割</label></span>
-          <div>
-            <div class="mt5">
-                <label class="label-tit label-wide" for="baseAry">工具相关依赖</label>
-                <input class="short" type="text" id="baseAry" value="lodash" placeholder="多个依赖以逗号,分割" />
-            </div>
-            <div>
-                <label class="label-tit label-wide" for="frameAry">框架相关依赖</label>
-                <input class="short" type="text" id="frameAry" value="react,react-dom" placeholder="多个依赖以,分割" />
-            </div>
-          </div>
+          <h4>可选:三方包CacheGroup</h4>
+          <label class="checkbox-inline"><input type="checkbox" value="dll" class="dll" checked=true>CacheGroup:</label>
+          <p class="describe">'- node_modules'目录依赖均会单独打包缓存</p>
         </div>
       
         <div class="carding">
@@ -288,7 +279,7 @@
         
         <div class="carding pad10 create-card">
           <!-- <input type="button" id="submit" value="创建"/> -->
-          <div id="submit">创建</div>
+          <!-- <div id="submit">创建</div> -->
           <div id="reply" class="show">总要对自己好一点，Easy Pack !</div>
           <div id="loading" class="hide">
               <div class="loader-inner line-scale-pulse-out-rapid">
