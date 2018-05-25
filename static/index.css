@@ -13,6 +13,9 @@ body{
 .mt5{
     margin-top:5px;
 }
+.hide{
+    display: none;
+}
 .wrap{
     /* background: #fff;
     padding: 0 15px; */

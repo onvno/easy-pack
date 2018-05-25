@@ -4,6 +4,24 @@
 // 4.输出文件到指定文件夹
 
 
+const tabWrap = document.getElementById('tabWrap');
+tabWrap.addEventListener('click', (e) => {
+    const tabLikeAry = document.querySelectorAll('#tabWrap li');
+    const tabAry = Array.prototype.slice.call(tabLikeAry);
+    const index = tabAry.indexOf(e.target.parentNode);
+    const contLikeAry = document.querySelectorAll('.wrap');
+    // const index = e.target.parent
+    for(var i=0; i<tabAry.length; i++) {
+        if(i !== index){ 
+            tabAry[i].classList.remove('active') 
+            contLikeAry[i].classList.add('hide');
+        } else {
+            tabAry[i].classList.add('active')
+            contLikeAry[i].classList.remove('hide');
+        }
+    }
+})
+
 
 // 选择目录
 const electron = require('electron');
