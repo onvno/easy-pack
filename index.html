@@ -28,8 +28,8 @@
         </div>
 
         <ul class="nav nav-tabs" id="tabWrap" role="tablist">
-            <li class="active"><a role="tab">Webpack3</a></li>
-            <li><a role="tab">Webpack4</a></li>
+            <li class="active"><a role="tab" data-version="webpack3">Webpack3</a></li>
+            <li><a role="tab" data-version="webpack4">Webpack4</a></li>
         </ul>
       
         <div class="wrap">
@@ -142,7 +142,7 @@
 
             <div class="carding switch hide">
                 <h4>可选:三方包CacheGroup</h4>
-                <label class="checkbox-inline"><input type="checkbox" value="dll" class="dll" checked=true>CacheGroup:</label>
+                <label class="checkbox-inline"><input type="checkbox" value="cachegroup" class="cachegroup" checked=true>CacheGroup</label>
                 <p class="describe">'- node_modules'目录依赖均会单独打包缓存</p>
             </div>
 

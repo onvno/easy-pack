@@ -11,7 +11,7 @@ const baseRender = require('./render/base.js');
 const moduleRender = require('./render/modules.js');
 const dllRender = require('./render/dll.js');
 const writeFile = require('./write.js');
-
+const CONST = require('./constant.js');
 
 // console.log(process.env['APP_PATH']);
 
@@ -48,6 +48,7 @@ ipc.on('open-error-dialog', function (event) {
 
 
 ipc.on('custom', function (event, arg) {
+
     const {
         dirSelect, // 项目目录
         project, // 项目名称
@@ -57,6 +58,8 @@ ipc.on('custom', function (event, arg) {
         plug, // 插件
         dll, // dll
         global, // 全局变量
+        webpackVersion, // webpack版本
+        cacheGroupStatus, // webpack4的三方包策略
     } = arg;
 
 
@@ -123,7 +126,7 @@ ipc.on('custom', function (event, arg) {
     /**
      * 基本配置
      */
-    baseRender(dispatch, getState());
+    baseRender(dispatch, getState(), webpackVersion);
 
 
     /**
@@ -131,7 +134,7 @@ ipc.on('custom', function (event, arg) {
      */
     if(style.includes('postcss')){
         fse.copySync(
-            path.resolve(EasyRoot, 'process/pack/style/postcss.config.js'),
+            path.resolve(EasyRoot, 'process', webpackVersion, '/style/postcss.config.js'),
             path.resolve(ProjectPath, 'postcss.config.js')
         );
     }
@@ -147,7 +150,7 @@ ipc.on('custom', function (event, arg) {
         }
 
         styleParseAry.map((part) => {
-            moduleRender("style", getState(), part, dispatch);
+            moduleRender("style", getState(), part, dispatch, webpackVersion);
         })
 
     }
@@ -169,7 +172,7 @@ ipc.on('custom', function (event, arg) {
         }
 
         jsParseAry.map((part) => {
-            moduleRender("js", getState(), part, dispatch);
+            moduleRender("js", getState(), part, dispatch, webpackVersion);
         })
     }
     handleJS(js);
@@ -179,9 +182,9 @@ ipc.on('custom', function (event, arg) {
      * opt - 类型处理
      */
     opt.map(part => {
-        moduleRender("modules", getState(), part, dispatch);
+        moduleRender("modules", getState(), part, dispatch, webpackVersion);
         if(part === 'react') {
-            const babelrcPath = path.resolve(EasyRoot, './process/pack/modules/react/.babelrc');
+            const babelrcPath = path.resolve(EasyRoot, 'process', webpackVersion, 'modules/react/.babelrc');
             const copyBabelrcPath = path.resolve(ProjectPath, './.babelrc');
             fse.copySync(babelrcPath, copyBabelrcPath);
         }
@@ -192,15 +195,16 @@ ipc.on('custom', function (event, arg) {
      * plugin
      */
     plug.map(part => {
-        moduleRender("plugins", getState(), part, dispatch);
+        moduleRender("plugins", getState(), part, dispatch, webpackVersion);
     })
 
     /**
-     * dll处理
+     * dll处理 - 暂时只对webpack3开发
      */
-    if(dll.dllStatus) {
+    console.log("CONST.webpackDLL:", CONST.webpackDLL);
+    if(webpackVersion === CONST.webpackDLL && dll.dllStatus) {
         // 模块render
-        moduleRender("", getState(), "dll", dispatch);
+        moduleRender("", getState(), "dll", dispatch, webpackVersion);
         const dllDataAry = dll.baseAry.concat(dll.frameAry);
         if(dllDataAry.length){
             dllDataAry.map(part => {
@@ -211,7 +215,8 @@ ipc.on('custom', function (event, arg) {
         // webpack.dll.js 文件写入
         const handleDLLCopy = () => {
             const Mustache = require('mustache');
-            const dllTempPath = path.resolve(EasyRoot, './process/pack/dll/webpack.dll.temp')
+            const dllTempPath = path.resolve(
+                EasyRoot, 'process', webpackVersion, '/dll/webpack.dll.temp');
             const dllTempData = fs.readFileSync(dllTempPath, 'utf-8');
             const dllConfigPath = path.resolve(ProjectPath, './config/webpack.dll.js');
             const renderData = Mustache.render(dllTempData, dll);

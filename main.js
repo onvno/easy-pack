@@ -8,8 +8,8 @@ const ROOTPATH = __dirname;
 let mainWindow
 
 function createWindow () {
-  // mainWindow = new BrowserWindow({width: 800, height: 765})
-  mainWindow = new BrowserWindow({width: 350, height: 810})
+  mainWindow = new BrowserWindow({width: 800, height: 810})
+  // mainWindow = new BrowserWindow({width: 350, height: 810})
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
@@ -17,7 +17,7 @@ function createWindow () {
   }))
 
   // 开启调试
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

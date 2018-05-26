@@ -94,6 +94,15 @@ submit.addEventListener('click', (e) => {
     let style = [];
     let js = [];
 
+    // webpack版本
+    let webpackVersion = document.querySelector('#tabWrap li.active a').dataset.version;
+    res.webpackVersion = webpackVersion;
+
+    // cachegroup
+    const cacheGroupStatus = document.querySelector('.cachegroup').checked;
+    res.cacheGroupStatus = cacheGroupStatus;
+
+
     // dll相关
     const dllStatus = document.querySelector('.dll').checked;
     const baseAryDom = document.getElementById('baseAry');

@@ -8,9 +8,9 @@ const { TYPES } = require('../reducer.js');
 
 const EasyRoot = process.env['APP_PATH']; //运行环境根目录
 
-const moduleRender = (name, state, part, dispatch) => {
+const moduleRender = (name, state, part, dispatch, version) => {
     const {Packages, Vars, Configs, VarsProd, ConfigsProd} = state;
-    const ModuleRoot = path.resolve(EasyRoot, `process/pack/${name}`);
+    const ModuleRoot = path.resolve(EasyRoot, 'process', version , name);
     const packVarConfig = require(path.resolve(ModuleRoot, `./${part}/config.js`));
     const packVarConfigProd = require(path.resolve(ModuleRoot, `./${part}/config.prod.js`));
     const packJSON = require(path.resolve(ModuleRoot,`./${part}/package.json`));
