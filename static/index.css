@@ -16,6 +16,16 @@ body{
 .hide{
     display: none;
 }
+
+.nav-tabs > li > a{
+    padding: 5px 10px;
+    font-weight: 200;
+    letter-spacing: 0.5px;
+}
+.switch{
+    height:138px;
+}
+
 #tabWrap li{
     cursor: pointer;
 }
@@ -35,7 +45,7 @@ body{
     overflow: hidden;
 }
 .carding.pad10{
-    padding:10px 15px;
+    padding:5px 15px;
 }
 
 .carding.create-card{
@@ -86,7 +96,7 @@ p.describe{
 }
 .title h1{
     margin:0;
-    padding: 18px 20px;
+    padding: 12px 20px;
     font-size: 24px;
     font-weight: lighter;
     text-align: center;
