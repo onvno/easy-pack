@@ -2,7 +2,17 @@
 
 欢迎使用EasyPack快速构建工程！
 
-![](http://ww1.sinaimg.cn/large/63885f75ly1frh6f0fpmfg20g80mqguf.gif)
+![](http://ww1.sinaimg.cn/large/63885f75ly1froose30kag20g80mqaju.gif)
+
+#### 说明
+
+* 为展示效果，动图省去了`npm install`和`npm run start`项目启动步骤
+
+* 目前测试均在mac上执行，如Window下有问题，可随时提issue跟进解决
+
+* 支持webpack3 & 4，目前暂未对webpack做过多优化，后续根据需求添加
+
+  
 
 #### Start
 
