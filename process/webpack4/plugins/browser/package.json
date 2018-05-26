@@ -1,0 +1,5 @@
+{
+    "devDependencies": {
+        "open-browser-webpack-plugin": "0.0.5"
+    }
+}

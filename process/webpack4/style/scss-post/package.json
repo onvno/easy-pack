@@ -1,0 +1,9 @@
+{
+    "devDependencies": {
+        "node-sass": "^4.9.0",
+        "sass-loader": "^7.0.1",
+        "cssnano": "^3.10.0",
+        "autoprefixer": "^8.3.0",
+        "postcss-loader": "^2.1.4"
+    }
+}

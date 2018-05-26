@@ -201,7 +201,6 @@ ipc.on('custom', function (event, arg) {
     /**
      * dll处理 - 暂时只对webpack3开发
      */
-    console.log("CONST.webpackDLL:", CONST.webpackDLL);
     if(webpackVersion === CONST.webpackDLL && dll.dllStatus) {
         // 模块render
         moduleRender("", getState(), "dll", dispatch, webpackVersion);
@@ -223,6 +222,14 @@ ipc.on('custom', function (event, arg) {
             fs.writeFileSync(dllConfigPath, renderData, 'utf-8');
         }
         handleDLLCopy()
+    }
+
+    /**
+     * cacheGroup = 支持webpack4
+     */
+    if(webpackVersion === CONST.webpackCacheGroup.version && cacheGroupStatus == true) {
+        console.log(111);
+        moduleRender("", getState(), "cachegroup", dispatch, webpackVersion);
     }
 
     /**

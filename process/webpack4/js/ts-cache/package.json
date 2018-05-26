@@ -1,0 +1,7 @@
+{
+    "devDependencies": {
+        "cache-loader": "^1.2.2",
+        "ts-loader": "^3.5.0",
+        "typescript": "^2.8.3"
+    }
+}
