@@ -9,7 +9,7 @@ tabWrap.addEventListener('click', (e) => {
     const tabLikeAry = document.querySelectorAll('#tabWrap li');
     const tabAry = Array.prototype.slice.call(tabLikeAry);
     const index = tabAry.indexOf(e.target.parentNode);
-    const contLikeAry = document.querySelectorAll('.wrap');
+    const contLikeAry = document.querySelectorAll('.switch');
     // const index = e.target.parent
     for(var i=0; i<tabAry.length; i++) {
         if(i !== index){ 

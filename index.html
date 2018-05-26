@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Easy Pack</title>
-    <link rel="stylesheet" href="./static/bootstrap.css">
-    <link rel="stylesheet" href="./static/index.css">
-    <!-- <link rel="stylesheet" href="./static/loaders.css"> -->
-  </head>
-  <body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Easy Pack</title>
+        <link rel="stylesheet" href="./static/bootstrap.css">
+        <link rel="stylesheet" href="./static/index.css">
+        <!-- <link rel="stylesheet" href="./static/loaders.css"> -->
+    </head>
+    <body>
     <!-- All of the Node.js APIs are available in this renderer process. -->
     <!-- We are using Node.js <script>document.write(process.versions.node)</script>,
     Chromium <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>. -->
-
     
-      <div class="title">
+        <div class="title">
             <h1>Easy Pack</h1>
             <a class="github" href="https://github.com/onvno/easy-pack">
                 <img class="icon" src="./static/github.png" alt="">
@@ -26,272 +25,154 @@
                     <img src="./static/qr/qqgroup.png" alt="">
                 </div>
             </div>
-      </div>
-
-      <ul class="nav nav-tabs" id="tabWrap" role="tablist">
-        <li class="active"><a role="tab">Webpack3</a></li>
-        <li><a role="tab">Webpack4</a></li>
-      </ul>
-      
-    <div class="wrap">
-      <!-- 目录 -->
-      <div style="display: none;">
-          <label for="dir">打开目录</label>
-          <input id="dir" />
-      </div>
-
-      <div class="project_wrap carding">
-          <h4>创建项目</h4>
-          <!--选择目录  -->
-          <div>
-              <label class="label-tit" for="dirSelect"><span class="redStar">* </span>项目路径</label>
-              <input type="text" id="dirSelect" placeholder="请输入" />
-              <!-- <input type="text" id="dirSelect" value="/Users/AYA/Desktop" /> -->
-          </div>
-
-          <div>
-              <!-- 项目名称 -->
-              <label class="label-tit" for="project"><span class="redStar">* </span>项目名称</label>
-              <input type="text" id="project" placeholder="请输入" />
-          </div>
-
-          <p class="describe">- 约定:'src'开发目录,'dist'打包目录,'dev'预编译目录</p>
-      </div>
-
-      <div class="carding">
-        <h4>框架类型</h4>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="react" class="opt">
-            React
-        </label>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="vue" class="opt">
-            Vue
-        </label>
-      </div>
-
-      <div class="carding">
-        <h4>编译类型</h4>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="less" class="style">
-            Less
-        </label>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="scss" class="style">
-            SCSS
-        </label>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="css" class="style" checked=true disabled>
-            CSS
-        </label>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="ts" class="jsdom">
-            TypeScript
-        </label>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="js" class="jsdom" checked=true disabled>
-            JS(JSX)
-        </label>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="jpg" class="opt" checked=true disabled>
-            图片
-        </label>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="font" class="opt" >
-            字体
-        </label>
-      </div>
-    
-      <div class="carding">
-        <h4>常用插件</h4> 
-        <label class="checkbox-inline">
-            <input type="checkbox" value="browser" class="plug" checked=true disabled>
-            OpenBrowser
-        </label>
-        <label class="checkbox-inline">
-            <input type="checkbox" value="hot" class="plug" checked=true disabled>
-            HMR
-        </label>
-        <label  class="checkbox-inline">
-            <input type="checkbox" value="html" class="plug" checked=true disabled>
-            HtmlWebpack
-        </label>
-        <label  class="checkbox-inline">
-            <input type="checkbox" value="cache" class="jsdom" />
-            Cacheloader
-        </label>
-        <label  class="checkbox-inline">
-            <input type="checkbox" value="postcss" class="style" />
-            PostCSS
-        </label>
-      </div>
-    
-      <div class="carding">
-        <h4>可选:预编译DLL</h4>
-        <label class="checkbox-inline"><input type="checkbox" value="dll" class="dll" checked=true>DLL代码分割:依赖参考见下，以逗号`,`分割</label></span>
-        <div>
-          <div class="mt5">
-              <label class="label-tit label-wide" for="baseAry">工具相关依赖</label>
-              <input class="short" type="text" id="baseAry" value="lodash" placeholder="多个依赖以逗号,分割" />
-          </div>
-          <div>
-              <label class="label-tit label-wide" for="frameAry">框架相关依赖</label>
-              <input class="short" type="text" id="frameAry" value="react,react-dom" placeholder="多个依赖以,分割" />
-          </div>
         </div>
-      </div>
-    
-      <div class="carding">
-        <h4>开发服务器(默认选用express)</h4>
-        <div>
-            <label class="checkbox-inline">
-                <input type="checkbox" value="browser" id="mock" >
-                是否开启mock
-            </label>
-            <label class="checkbox-inline"><input type="checkbox" value="browser" id="proxy" checked>是否开启代理</label>
-        </div>
-      </div>
+
+        <ul class="nav nav-tabs" id="tabWrap" role="tablist">
+            <li class="active"><a role="tab">Webpack3</a></li>
+            <li><a role="tab">Webpack4</a></li>
+        </ul>
       
-      <div class="carding pad10 create-card">
-        <!-- <input type="button" id="submit" value="创建"/> -->
-        <div id="submit">创建</div>
-        <div id="reply" class="show">总要对自己好一点，Easy Pack !</div>
-        <div id="loading" class="hide">
-            <div class="loader-inner line-scale-pulse-out-rapid">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+        <div class="wrap">
+            <!-- 目录 -->
+            <div style="display: none;">
+                <label for="dir">打开目录</label>
+                <input id="dir" />
             </div>
-        </div>
-      </div>
-    </div>
-    <div class="wrap hide">
-        <!-- 目录 -->
-        <div style="display: none;">
-            <label for="dir">打开目录</label>
-            <input id="dir" />
-        </div>
-  
-        <div class="project_wrap carding">
-            <h4>Webpack</h4>
-            <!--选择目录  -->
+
+            <div class="project_wrap carding">
+                <h4>创建项目</h4>
+                <!--选择目录  -->
+                <div>
+                    <label class="label-tit" for="dirSelect"><span class="redStar">* </span>项目路径</label>
+                    <input type="text" id="dirSelect" placeholder="请输入" />
+                    <!-- <input type="text" id="dirSelect" value="/Users/AYA/Desktop" /> -->
+                </div>
+
+                <div>
+                    <!-- 项目名称 -->
+                    <label class="label-tit" for="project"><span class="redStar">* </span>项目名称</label>
+                    <input type="text" id="project" placeholder="请输入" />
+                </div>
+
+                <p class="describe">- 约定:'src'开发目录,'dist'打包目录,'dev'预编译目录</p>
+            </div>
+
+            <div class="carding">
+                <h4>框架类型</h4>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="react" class="opt">
+                    React
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="vue" class="opt">
+                    Vue
+                </label>
+            </div>
+
+            <div class="carding">
+                <h4>编译类型</h4>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="less" class="style">
+                    Less
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="scss" class="style">
+                    SCSS
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="css" class="style" checked=true disabled>
+                    CSS
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="ts" class="jsdom">
+                    TypeScript
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="js" class="jsdom" checked=true disabled>
+                    JS(JSX)
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="jpg" class="opt" checked=true disabled>
+                    图片
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="font" class="opt" >
+                    字体
+                </label>
+            </div>
+
+            <div class="carding">
+                <h4>常用插件</h4> 
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="browser" class="plug" checked=true disabled>
+                    OpenBrowser
+                </label>
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="hot" class="plug" checked=true disabled>
+                    HMR
+                </label>
+                <label  class="checkbox-inline">
+                    <input type="checkbox" value="html" class="plug" checked=true disabled>
+                    HtmlWebpack
+                </label>
+                <label  class="checkbox-inline">
+                    <input type="checkbox" value="cache" class="jsdom" />
+                    Cacheloader
+                </label>
+                <label  class="checkbox-inline">
+                    <input type="checkbox" value="postcss" class="style" />
+                    PostCSS
+                </label>
+            </div>
+
+            <div class="carding switch">
+                <h4>可选:预编译DLL</h4>
+                <label class="checkbox-inline"><input type="checkbox" value="dll" class="dll" checked=true>DLL代码分割:依赖参考见下，以逗号`,`分割</label></span>
+                <div>
+                    <div class="mt5">
+                        <label class="label-tit label-wide" for="baseAry">工具相关依赖</label>
+                        <input class="short" type="text" id="baseAry" value="lodash" placeholder="多个依赖以逗号,分割" />
+                    </div>
+                    <div>
+                        <label class="label-tit label-wide" for="frameAry">框架相关依赖</label>
+                        <input class="short" type="text" id="frameAry" value="react,react-dom" placeholder="多个依赖以,分割" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="carding switch hide">
+                <h4>可选:三方包CacheGroup</h4>
+                <label class="checkbox-inline"><input type="checkbox" value="dll" class="dll" checked=true>CacheGroup:</label>
+                <p class="describe">'- node_modules'目录依赖均会单独打包缓存</p>
+            </div>
+
+            <div class="carding">
+            <h4>开发服务器(默认选用express)</h4>
             <div>
-                <label class="label-tit" for="dirSelect"><span class="redStar">* </span>项目路径</label>
-                <input type="text" id="dirSelect" placeholder="请输入" />
-                <!-- <input type="text" id="dirSelect" value="/Users/AYA/Desktop" /> -->
+                <label class="checkbox-inline">
+                    <input type="checkbox" value="browser" id="mock" >
+                    是否开启mock
+                </label>
+                <label class="checkbox-inline"><input type="checkbox" value="browser" id="proxy" checked>是否开启代理</label>
             </div>
-  
-            <div>
-                <!-- 项目名称 -->
-                <label class="label-tit" for="project"><span class="redStar">* </span>项目名称</label>
-                <input type="text" id="project" placeholder="请输入" />
             </div>
-  
-            <p class="describe">- 约定:'src'开发目录,'dist'打包目录</p>
+            
+            <div class="carding pad10 create-card">
+            <!-- <input type="button" id="submit" value="创建"/> -->
+            <div id="submit">创建</div>
+            <div id="reply" class="show">总要对自己好一点，Easy Pack !</div>
+            <div id="loading" class="hide">
+                <div class="loader-inner line-scale-pulse-out-rapid">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            </div>
         </div>
-  
-        <div class="carding">
-          <h4>框架类型</h4>
-          <label class="checkbox-inline">
-              <input type="checkbox" value="react" class="opt">
-              React
-          </label>
-          <label class="checkbox-inline">
-              <input type="checkbox" value="vue" class="opt">
-              Vue
-          </label>
-        </div>
-  
-        <div class="carding">
-          <h4>编译类型</h4>
-          <label class="checkbox-inline">
-              <input type="checkbox" value="less" class="style">
-              Less
-          </label>
-          <label class="checkbox-inline">
-              <input type="checkbox" value="scss" class="style">
-              SCSS
-          </label>
-          <label class="checkbox-inline">
-              <input type="checkbox" value="css" class="style" checked=true disabled>
-              CSS
-          </label>
-          <label class="checkbox-inline">
-              <input type="checkbox" value="ts" class="jsdom">
-              TypeScript
-          </label>
-          <label class="checkbox-inline">
-              <input type="checkbox" value="js" class="jsdom" checked=true disabled>
-              JS(JSX)
-          </label>
-          <label class="checkbox-inline">
-              <input type="checkbox" value="jpg" class="opt" checked=true disabled>
-              图片
-          </label>
-          <label class="checkbox-inline">
-              <input type="checkbox" value="font" class="opt" >
-              字体
-          </label>
-        </div>
-      
-        <div class="carding">
-          <h4>常用插件</h4> 
-          <label class="checkbox-inline">
-              <input type="checkbox" value="browser" class="plug" checked=true disabled>
-              OpenBrowser
-          </label>
-          <label class="checkbox-inline">
-              <input type="checkbox" value="hot" class="plug" checked=true disabled>
-              HMR
-          </label>
-          <label  class="checkbox-inline">
-              <input type="checkbox" value="html" class="plug" checked=true disabled>
-              HtmlWebpack
-          </label>
-          <label  class="checkbox-inline">
-              <input type="checkbox" value="cache" class="jsdom" />
-              Cacheloader
-          </label>
-          <label  class="checkbox-inline">
-              <input type="checkbox" value="postcss" class="style" />
-              PostCSS
-          </label>
-        </div>
-      
-        <div class="carding">
-          <h4>可选:三方包CacheGroup</h4>
-          <label class="checkbox-inline"><input type="checkbox" value="dll" class="dll" checked=true>CacheGroup:</label>
-          <p class="describe">'- node_modules'目录依赖均会单独打包缓存</p>
-        </div>
-      
-        <div class="carding">
-          <h4>开发服务器(默认选用express)</h4>
-          <div>
-              <label class="checkbox-inline">
-                  <input type="checkbox" value="browser" id="mock" >
-                  是否开启mock
-              </label>
-              <label class="checkbox-inline"><input type="checkbox" value="browser" id="proxy" checked>是否开启代理</label>
-          </div>
-        </div>
-        
-        <div class="carding pad10 create-card">
-          <!-- <input type="button" id="submit" value="创建"/> -->
-          <!-- <div id="submit">创建</div> -->
-          <div id="reply" class="show">总要对自己好一点，Easy Pack !</div>
-          <div id="loading" class="hide">
-              <div class="loader-inner line-scale-pulse-out-rapid">
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-              </div>
-          </div>
-        </div>
-    </div>
+
 
 
     <script>
