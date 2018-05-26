@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "start": "node bin/server",
+        "start": "if [ ! -f ./dev/base.js ]; then npm run dll; fi && node bin/server",
         "dll": "cross-env NODE_ENV=development webpack --progress -d --hide-modules --config ./config/webpack.dll.js",
         "build_pack": "node bin/build",
         "build_dll": "cross-env NODE_ENV=production webpack --sort-assets-by 'size' --progress -p --hide-modules --config ./config/webpack.dll.js",

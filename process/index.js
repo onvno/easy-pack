@@ -134,7 +134,7 @@ ipc.on('custom', function (event, arg) {
      */
     if(style.includes('postcss')){
         fse.copySync(
-            path.resolve(EasyRoot, 'process', webpackVersion, '/style/postcss.config.js'),
+            path.resolve(EasyRoot, 'process', webpackVersion, 'style/postcss.config.js'),
             path.resolve(ProjectPath, 'postcss.config.js')
         );
     }
@@ -201,7 +201,7 @@ ipc.on('custom', function (event, arg) {
     /**
      * dll处理 - 暂时只对webpack3开发
      */
-    if(webpackVersion === CONST.webpackDLL && dll.dllStatus) {
+    if(webpackVersion === CONST.webpackDLL.version && dll.dllStatus) {
         // 模块render
         moduleRender("", getState(), "dll", dispatch, webpackVersion);
         const dllDataAry = dll.baseAry.concat(dll.frameAry);
@@ -215,7 +215,7 @@ ipc.on('custom', function (event, arg) {
         const handleDLLCopy = () => {
             const Mustache = require('mustache');
             const dllTempPath = path.resolve(
-                EasyRoot, 'process', webpackVersion, '/dll/webpack.dll.temp');
+                EasyRoot, 'process', webpackVersion, 'dll/webpack.dll.temp');
             const dllTempData = fs.readFileSync(dllTempPath, 'utf-8');
             const dllConfigPath = path.resolve(ProjectPath, './config/webpack.dll.js');
             const renderData = Mustache.render(dllTempData, dll);
