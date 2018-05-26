@@ -2,7 +2,7 @@
 
 欢迎使用EasyPack快速构建工程！
 
-![](http://ww1.sinaimg.cn/large/63885f75ly1froose30kag20g80mqaju.gif)
+![](http://ww1.sinaimg.cn/large/63885f75ly1frop6ksix3g20g80mqwns.gif)
 
 #### 说明
 
