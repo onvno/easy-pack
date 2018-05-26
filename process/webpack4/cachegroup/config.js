@@ -6,7 +6,7 @@ module.exports.config = {
         splitChunks: {
             cacheGroups: {
                 vendors: {
-                    test: /[\\/]node_modules[\\/]/,
+                    test: /[/]node_modules[/]/,
                     name: 'vendors',
                     enforce: true,
                     chunks: 'all'

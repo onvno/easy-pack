@@ -1,7 +1,6 @@
 module.exports.var = {
     path : "<%require('path')%>",
     webpack : "<%require('webpack')%>"  ,  
-    CommonsChunkPlugin : "<%require('webpack/lib/optimize/CommonsChunkPlugin')%>",
     CONST : "<%require('./constant.json')%>",
     ROOT : "<%path.resolve(__dirname, '../')%>",
 }
@@ -34,33 +33,5 @@ module.exports.config = {
     },
     externals: {},
 
-    plugins: [
-        "<%new webpack.optimize.UglifyJsPlugin({\
-            sourceMap: true,\
-            parallel: true,\
-            uglifyOptions: {\
-                output: {\
-                    comments: false,\
-                    beautify: false,\
-                },\
-                compress: {\
-                    unused: true,\
-                    dead_code: true,\
-                    conditionals: true,\
-                    booleans: true,\
-                    loops: true,\
-                    pure_getters: true,\
-                    warnings: false,\
-                    drop_console: true\
-                },\
-            }\
-        })%>",
-        "<%new webpack.optimize.CommonsChunkPlugin({\
-            names: ['vendor'],\
-            filename: 'vendor.[hash:5].js',\
-            minChunks: ({ resource }) => {\
-                resource && resource.indexOf('node_modules') && resource.match(/\.js$/);\
-            },\
-        })%>",
-    ]
+    plugins: [],
 }

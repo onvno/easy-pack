@@ -228,7 +228,6 @@ ipc.on('custom', function (event, arg) {
      * cacheGroup = 支持webpack4
      */
     if(webpackVersion === CONST.webpackCacheGroup.version && cacheGroupStatus == true) {
-        console.log(111);
         moduleRender("", getState(), "cachegroup", dispatch, webpackVersion);
     }
 

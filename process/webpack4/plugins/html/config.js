@@ -8,7 +8,6 @@ module.exports.config = {
             'filename': 'index.html',\
             'template': './src/index.html',\
             'inject': 'body',\
-            'favicon': './src/assets/img/favicon.png',\
-            'chunks': ['index']})%>",
+            'favicon': './src/assets/img/favicon.png'})%>"
     ]
 }
