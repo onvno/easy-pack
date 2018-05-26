@@ -162,6 +162,14 @@ ipc.on('custom', function (event, arg) {
      */
     const handleJS = (jsAry) => {
         let jsParseAry;
+
+        // 拷贝ts配置文件
+        if(jsAry.includes('ts')) {
+            const tsConfigPath = path.resolve(EasyRoot, 'process', webpackVersion, 'js/ts/tsconfig.json');
+            const copyTsConfigPath = path.resolve(ProjectPath, './tsconfig.json');
+            fse.copySync(tsConfigPath, copyTsConfigPath);
+        }
+
         if(jsAry.includes('cache')){
             jsAry.splice(jsAry.indexOf('cache'), 1);
             jsParseAry = jsAry.map((item) => {
