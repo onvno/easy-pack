@@ -34,9 +34,17 @@ $ npm run start
 
 #### Build
 
+输出到delease目录
+
 ```
 $ cd easy-pack
-$ npm run build
+
+# mac - 输出dmg
+$ npm run mac
+
+# window
+$ npm run win
+
 ```
 
 

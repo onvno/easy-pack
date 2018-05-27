@@ -1,10 +1,12 @@
 {
   "name": "EasyPack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Easy to Set Webpack Config",
   "main": "main.js",
   "scripts": {
     "start": "electron --inspect=5858 .",
+    "mac": "cross-env ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ build -m",
+    "win": "cross-env ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ build -w",
     "build": "electron-packager . EasyPack --out /Users/AYA/desktop --overwrite --icon ./static/easypack"
   },
   "repository": "https://github.com/electron/electron-quick-start",
@@ -17,16 +19,39 @@
   ],
   "author": "GitHub",
   "license": "CC0-1.0",
+  "build": {
+    "productName": "easy-pack",
+    "appId": "cn.easypack.leedoo",
+    "asar": false,
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "static/easypack"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "static/easypack"
+    },
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    }
+  },
   "devDependencies": {
+    "cross-env": "^5.1.6",
+    "electron": "^1.8.6",
+    "electron-builder": "^20.15.1"
   },
   "dependencies": {
-    "electron": "^1.8.6",
     "electron-reload": "^1.2.2",
     "fs-extra": "^6.0.0",
     "js-beautify": "^1.7.5",
     "latest-version": "^3.1.0",
     "mustache": "^2.3.0",
-    "webpack-merge": "^4.1.2",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "webpack-merge": "^4.1.2"
   }
 }
