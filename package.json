@@ -30,9 +30,7 @@
       "icon": "static/easypack"
     },
     "win": {
-      "target": [
-        "nsis"
-      ],
+      "target": "nsis",
       "icon": "static/easypack"
     },
     "directories": {
