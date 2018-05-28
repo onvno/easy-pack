@@ -2,7 +2,7 @@
 // 2.传递webpack参数
 // 3.收到参数合并文件
 // 4.输出文件到指定文件夹
-
+// 5 更新提醒
 
 const tabWrap = document.getElementById('tabWrap');
 tabWrap.addEventListener('click', (e) => {
@@ -211,3 +211,16 @@ ipcRenderer.on('customReply', function (event, arg) {
         }, 5000);
     }, 1000)
 })
+
+
+
+// 更新提醒
+const { remote } = require('electron');
+const updater = remote.require('electron-simple-updater');
+
+updater.on('update-available', (meta) => {
+    console.log('可更新版本:', meta.version);
+    dialog.showErrorBox('更新提醒', `可从QQ交流群下载最新版本${meta.version}`)
+});
+updater.on('error', (err) => {"错误提醒:", err});
+updater.checkForUpdates();

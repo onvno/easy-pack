@@ -5,11 +5,24 @@ const path = require('path')
 const url = require('url')
 const ROOTPATH = __dirname;
 
+
+// 更新提醒
+const updater = require('electron-simple-updater');
+updater.init({
+  checkUpdateOnStart: false,
+  autoDownload: false,
+});
+
 let mainWindow
 
 function createWindow () {
   // mainWindow = new BrowserWindow({width: 800, height: 812})
-  mainWindow = new BrowserWindow({width: 350, height: 812})
+  mainWindow = new BrowserWindow({
+    width: 350,
+    height: 812,
+    resizable:false,
+    fullscreenable:false
+  })
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
