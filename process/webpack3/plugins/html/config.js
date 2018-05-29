@@ -5,10 +5,10 @@ module.exports.var = {
 module.exports.config = {
     plugins: [
         "<%new HtmlWebpackPlugin({\
-            'filename': 'index.html',\
-            'template': './src/index.html',\
-            'inject': 'body',\
-            'favicon': './src/assets/img/favicon.png',\
-            'chunks': ['index']})%>",
+            filename: 'index.html',\
+            template: './src/index.html',\
+            inject: 'body',\
+            favicon: './src/assets/img/favicon.png',\
+            chunks: ['index']})%>",
     ]
 }

@@ -1,4 +1,9 @@
 {
+    "name": "",
+    "version": "",
+    "description": "",
+    "scripts": {},
+    "author": "",
     "devDependencies": {
         "chalk": "^2.4.1",
         "express": "^4.16.3",
