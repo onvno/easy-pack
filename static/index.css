@@ -95,12 +95,32 @@ p.describe{
     
 }
 .title h1{
+    position: relative;
     margin:0;
     padding: 12px 20px;
     font-size: 24px;
     font-weight: lighter;
     text-align: center;
     border-bottom: 1px solid #eee;
+}
+.title h1.cursor{
+    cursor: pointer;
+}
+.title h1 span{
+    display: none;
+    position: absolute;
+    color: #fff;
+    right:116px;
+    top:5px;
+    height:18px;
+    width:18px;
+    line-height: 16px;
+    font-size:12px;
+    border-radius: 9px;
+    /* padding:0 5px; */
+    background-color: red;
+    border: 1px solid #2086d7;
+
 }
 .title .github, .title .qq{
     cursor: pointer;

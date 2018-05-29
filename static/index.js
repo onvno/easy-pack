@@ -220,7 +220,20 @@ const updater = remote.require('electron-simple-updater');
 
 updater.on('update-available', (meta) => {
     console.log('可更新版本:', meta.version);
-    dialog.showErrorBox('更新提醒', `可从QQ交流群下载最新版本${meta.version}`)
+    // dialog.showErrorBox('更新提醒', `可从QQ交流群下载最新版本${meta.version}`)
+    document.querySelector('#easy-tit span').classList.add('show');
+    document.querySelector('#easy-tit').classList.add('cursor');
 });
+updater.on('update-not-available', () => {
+    document.querySelector('#easy-tit span').classList.remove('show');
+    document.querySelector('#easy-tit').classList.remove('cursor');
+})
 updater.on('error', (err) => {"错误提醒:", err});
 updater.checkForUpdates();
+
+document.getElementById('easy-tit').addEventListener('click', ()=>{
+    const hasShow = document.querySelector('#easy-tit span').classList.contains('show');
+    if(hasShow) {
+        dialog.showErrorBox('更新提醒', `可从QQ交流群下载最新版本`);
+    }
+})
