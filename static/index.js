@@ -216,10 +216,13 @@ ipcRenderer.on('customReply', function (event, arg) {
 
 // 更新提醒
 const { remote } = require('electron');
+const packageFile = require('../package.json');
 const updater = remote.require('electron-simple-updater');
+let newVersion = '';
 
 updater.on('update-available', (meta) => {
-    console.log('可更新版本:', meta.version);
+    newVersion = meta.version;
+    // console.log('可更新版本:', meta.version);
     // dialog.showErrorBox('更新提醒', `可从QQ交流群下载最新版本${meta.version}`)
     document.querySelector('#easy-tit span').classList.add('show');
     document.querySelector('#easy-tit').classList.add('cursor');
@@ -234,6 +237,6 @@ updater.checkForUpdates();
 document.getElementById('easy-tit').addEventListener('click', ()=>{
     const hasShow = document.querySelector('#easy-tit span').classList.contains('show');
     if(hasShow) {
-        dialog.showErrorBox('更新提醒', `可从QQ交流群下载最新版本`);
+        dialog.showErrorBox('更新提醒', `当前版本: v${packageFile.version}\n可从QQ交流群下载最新版本 ${newVersion}`);
     }
 })
