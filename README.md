@@ -1,8 +1,16 @@
 # EasyPack
 
-欢迎使用EasyPack快速构建工程！
+欢迎使用EasyPack快速构建工程！EasyPack专注于项目构建，实现：
 
-![](http://ww1.sinaimg.cn/large/63885f75ly1frop6ksix3g20g80mqwns.gif)
+- 可视化构建
+- 减少重复工作
+- 所见即所得，无冗余配置
+- 输出暴露配置文件，方便自定义及优化
+
+
+![](http://ww1.sinaimg.cn/large/63885f75ly1fruz0ynqdsg20g80mqqc4.gif)
+
+
 
 #### 说明
 
@@ -12,7 +20,7 @@
 
 * 支持webpack3 & 4，目前暂未对webpack做过多优化，后续根据需求添加
 
-  
+
 
 #### Start
 
@@ -49,11 +57,8 @@ $ npm run win
 
 
 
-EasyPack只专注在构建方面
+#### 讨论群
 
-- 效率：避免重复配置的工作
-- 交互便捷：实现可视化操作
-- 人性化：直接暴露配置，方便修改配置
-- 专注开发
+![](http://ww1.sinaimg.cn/large/63885f75ly1fruz4oqxe5j207i0aaq3q.jpg)
 
 
