@@ -10,14 +10,29 @@ tabWrap.addEventListener('click', (e) => {
     const tabAry = Array.prototype.slice.call(tabLikeAry);
     const index = tabAry.indexOf(e.target.parentNode);
     const contLikeAry = document.querySelectorAll('.switch');
+    const epackAry = document.querySelectorAll('.epack');
     // const index = e.target.parent
-    for(var i=0; i<tabAry.length; i++) {
-        if(i !== index){ 
-            tabAry[i].classList.remove('active') 
-            contLikeAry[i].classList.add('hide');
-        } else {
-            tabAry[i].classList.add('active')
-            contLikeAry[i].classList.remove('hide');
+    
+    // outer wrap
+    if(index === 2){
+        // gulp
+        epackAry[0].classList.add('wrap_hide');
+        epackAry[1].classList.remove('wrap_hide');
+
+    } else if(index >= 0) {
+        // webpack
+        epackAry[0].classList.remove('wrap_hide');
+        epackAry[1].classList.add('wrap_hide');
+
+        // webpack3 & 4 切换
+        for(var i=0; i<tabAry.length-1; i++) {
+            if(i !== index){ 
+                tabAry[i].classList.remove('active') 
+                contLikeAry[i].classList.add('hide');
+            } else {
+                tabAry[i].classList.add('active')
+                contLikeAry[i].classList.remove('hide');
+            }
         }
     }
 })
@@ -85,8 +100,8 @@ dirSelect.addEventListener('click', (e) => {
 })
 
 // 数据传递
-const btn = document.getElementById("submit");
-submit.addEventListener('click', (e) => {
+const submitBtn = document.getElementById("submit");
+submitBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     let res = {};
     let opt = [];
@@ -239,4 +254,93 @@ document.getElementById('easy-tit').addEventListener('click', ()=>{
     if(hasShow) {
         dialog.showErrorBox('更新提醒', `当前版本: v${packageFile.version}\n可从QQ交流群下载最新版本 ${newVersion}`);
     }
+})
+
+
+
+// 以下为Gulp
+
+// 保存目录dir
+const gulpDirSelect = document.getElementById('gulpDirSelect');
+gulpDirSelect.addEventListener('click', (e) => {
+    dialog.showOpenDialog( { 
+        properties: [ 'openDirectory' ],
+        message: "请选择创建项目的目录"
+    }, ( path ) => {
+        // console.log("path:", path);
+        gulpDirSelect.value = path[0];
+    } )
+})
+
+// 数据传递
+const submitGulp = document.getElementById("gulpSubmit");
+submitGulp.addEventListener('click', (e) => {
+    e.stopPropagation();
+    let res = {};
+    let plug = [];
+    let style = [];
+    let js = [];
+    let template = [];
+
+    // 目录
+    const dirDom = document.getElementById('gulpDirSelect');
+    res.dirSelect = dirDom.value;
+
+    // 项目名
+    const projectDom = document.getElementById('gulpProject');
+    res.project = projectDom.value;
+
+    // style集合
+    const styleDom = document.querySelectorAll('.gulpStyle');
+    for(let sd=0; sd<styleDom.length; sd++) {
+        if(styleDom[sd].checked === true) {
+            style.push(styleDom[sd].value)
+        }
+    }
+    res.style = style;
+
+    
+    // js集合
+    const jsDom = document.querySelectorAll('.gulpJs');
+    for(let jd=0; jd<jsDom.length; jd++) {
+        if(jsDom[jd].checked === true) {
+            js.push(jsDom[jd].value)
+        }
+    }
+    res.js = js;
+
+
+    // template集合
+    const optDoms = document.querySelectorAll('.gulpTemp');
+    for(let i=0; i<optDoms.length; i++) {
+        if(optDoms[i].checked === true) {
+            template.push(optDoms[i].value)
+        }
+    }
+    res.template = template;
+
+
+    // 服务器配置相关
+    const mockStatus = false;
+    const proxyStatus = document.getElementById('gulpProxy').checked;
+    const browserStatus = document.getElementById('gulpBrwoser').checked;
+    const global = {
+        mock: mockStatus,
+        proxy: proxyStatus,
+        browser: browserStatus,
+        buildDir,
+        devDllDir
+    }
+    res.global = global;
+
+
+    // send消息 & loading
+    const replayDOM = document.getElementById('gulpReply');
+    const loaderDOM = document.getElementById('gulpLoading');
+    replayDOM.classList.remove('show');
+    replayDOM.classList.add('hide');
+    loaderDOM.classList.remove('hide');
+    loaderDOM.classList.add('show');
+
+    ipcRenderer.send('gulp', res);
 })

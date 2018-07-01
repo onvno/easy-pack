@@ -46,7 +46,7 @@ ipc.on('open-error-dialog', function (event) {
     dialog.showErrorBox('出错了', '开启DLL的情况,需要填写至少一个依赖')
 })
 
-
+// webpack
 ipc.on('custom', function (event, arg) {
 
     const {
@@ -248,3 +248,53 @@ ipc.on('custom', function (event, arg) {
         event.sender.send('customReply', '创建完成');
     }
 })
+
+// gulp
+ipc.on('gulp', function (event, arg) {
+    console.log("arg:", arg);
+
+    const {
+        dirSelect, // 项目目录
+        project, // 项目名称
+        style, //样式相关
+        js, //js相关
+        global, // 全局变量
+        template, //模板
+    } = arg;
+
+
+    /**
+     * 赋值全局常量
+     */
+    const ProjectPath = path.resolve(dirSelect, project)
+    console.log("dirSelect:", dirSelect, '\nproject:', project);
+
+    /**
+     * 创建项目目录
+     */
+    if(fs.existsSync(ProjectPath)){
+        event.sender.send('gulpReply', '项目已存在，请重新输入目录');
+        return 
+    }
+    fse.ensureDirSync(ProjectPath);
+  
+    const configBase = path.resolve(EasyRoot, './process/gulp');
+    const configJS = path.resolve(configBase, 'js/gulpfile.js');
+    const configCSS = path.resolve(configBase, 'css/gulpfile.js');
+
+    let configData = fse.readFileSync(configJS, 'utf-8');
+    configData = configData + '\n' + fse.readFileSync(configCSS, 'utf-8');
+
+
+    /**
+     * 整体文件写入
+     */
+    const gulpFilePath = path.resolve(ProjectPath, 'gulpfile.js');
+    const writeRes = fse.writeFileSync(gulpFilePath, configData, 'utf-8');
+    
+    if(writeRes) {
+        event.sender.send('gulpReply', '创建完成');
+    }
+})
+
+
