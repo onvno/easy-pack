@@ -63,7 +63,11 @@ const writeFile = (state , ProjectPath, dispatch) => {
             Vars: {},
             Configs: {},
             VarsProd: {},
-            ConfigsProd: {}
+            ConfigsProd: {},
+
+            gPackages: {},
+            gVars: {},
+            gConfigs: {}
         }
     })
 

@@ -324,6 +324,22 @@ ipc.on('gulp', function (event, arg) {
     const gulpPackJSON = path.resolve(ProjectPath, 'package.json');
     const JSONStr = JSON.stringify(gPackages, null, 4);
     const writeJSON = fse.writeFileSync(gulpPackJSON, JSONStr, 'utf-8')
+
+    // 清空状态
+    dispatch({
+        type: TYPES.update,
+        payload: {
+            Packages: {},
+            Vars: {},
+            Configs: {},
+            VarsProd: {},
+            ConfigsProd: {},
+
+            gPackages: {},
+            gVars: {},
+            gConfigs: {}
+        }
+    })
     
     if(writeRes && writeJSON) {
         event.sender.send('gulpReply', '创建完成');

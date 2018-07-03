@@ -10,7 +10,7 @@ const initState = {
     // gulp
     gPackages: {},
     gVars: {},
-    gConfigs: []
+    gConfigs: {}
 }
 
 const TYPES = {
