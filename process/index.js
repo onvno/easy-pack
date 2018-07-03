@@ -12,6 +12,9 @@ const moduleRender = require('./render/modules.js');
 const dllRender = require('./render/dll.js');
 const writeFile = require('./write.js');
 const CONST = require('./constant.js');
+const beautify = require('js-beautify').js_beautify;
+
+const gulpRender = require('./gulp/render/config.js');
 
 // console.log(process.env['APP_PATH']);
 
@@ -251,7 +254,7 @@ ipc.on('custom', function (event, arg) {
 
 // gulp
 ipc.on('gulp', function (event, arg) {
-    console.log("arg:", arg);
+    // console.log("arg:", arg);
 
     const {
         dirSelect, // 项目目录
@@ -267,7 +270,7 @@ ipc.on('gulp', function (event, arg) {
      * 赋值全局常量
      */
     const ProjectPath = path.resolve(dirSelect, project)
-    console.log("dirSelect:", dirSelect, '\nproject:', project);
+    // console.log("dirSelect:", dirSelect, '\nproject:', project);
 
     /**
      * 创建项目目录
@@ -277,22 +280,52 @@ ipc.on('gulp', function (event, arg) {
         return 
     }
     fse.ensureDirSync(ProjectPath);
-  
-    const configBase = path.resolve(EasyRoot, './process/gulp');
-    const configJS = path.resolve(configBase, 'js/gulpfile.js');
-    const configCSS = path.resolve(configBase, 'css/gulpfile.js');
 
-    let configData = fse.readFileSync(configJS, 'utf-8');
-    configData = configData + '\n' + fse.readFileSync(configCSS, 'utf-8');
+    // base
+    gulpRender(getState(), 'base', dispatch);
 
+    // css
+    gulpRender(getState(), 'css', dispatch);
 
-    /**
-     * 整体文件写入
-     */
+    // js
+    gulpRender(getState(), 'js', dispatch);
+
+    // 获取状态写入文件
+    const {gPackages, gVars, gConfigs} = getState();
     const gulpFilePath = path.resolve(ProjectPath, 'gulpfile.js');
-    const writeRes = fse.writeFileSync(gulpFilePath, configData, 'utf-8');
     
-    if(writeRes) {
+    // 写入gulpfile.js
+    let gConfigVarStr = "";
+    let webPackVarStr = "";
+    const webPackVarKeys = Object.keys(gVars);
+
+    webPackVarKeys.map( (wKey, wIndex) => {
+        webPackVarStr = webPackVarStr +`const ${wKey} = "${gVars[wKey]}";\n`
+    })
+
+    const gVarStr = webPackVarStr.replace(/"<%/g, '').replace(/%>"/g, '');
+    
+    let gConfigStr = "";
+    Object.keys(gConfigs).map( (key, index) => {
+        gConfigStr = gConfigStr + `${gConfigs[key]}\n`;
+    })
+    gConfigVarStr = gVarStr + '\n' + gConfigStr;
+
+    const writeRes = fse.writeFileSync(gulpFilePath, gConfigVarStr, 'utf-8');
+    const gulpFilePathData = fse.readFileSync(gulpFilePath, "utf-8");
+    const beautifyData = beautify(
+        gulpFilePathData, { 
+        indent_size: 4,
+        break_chained_methods: true
+    });
+    fse.writeFileSync(gulpFilePath, beautifyData, 'utf-8');
+
+    // 写入package.json
+    const gulpPackJSON = path.resolve(ProjectPath, 'package.json');
+    const JSONStr = JSON.stringify(gPackages, null, 4);
+    const writeJSON = fse.writeFileSync(gulpPackJSON, JSONStr, 'utf-8')
+    
+    if(writeRes && writeJSON) {
         event.sender.send('gulpReply', '创建完成');
     }
 })
