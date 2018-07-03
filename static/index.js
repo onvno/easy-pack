@@ -18,11 +18,15 @@ tabWrap.addEventListener('click', (e) => {
         // gulp
         epackAry[0].classList.add('wrap_hide');
         epackAry[1].classList.remove('wrap_hide');
-
+        tabAry[2].classList.add('active');
+        
+        tabAry[0].classList.remove('active');
+        tabAry[1].classList.remove('active');
     } else if(index >= 0) {
         // webpack
         epackAry[0].classList.remove('wrap_hide');
         epackAry[1].classList.add('wrap_hide');
+        tabAry[2].classList.remove('active');
 
         // webpack3 & 4 切换
         for(var i=0; i<tabAry.length-1; i++) {

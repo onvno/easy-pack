@@ -305,6 +305,11 @@ p.describe{
 
 
 /* gulp wrap */
+#gulp_wrap .carding.create-card{
+    position: fixed;
+    width: 350px;
+    bottom: 0;
+}
 .wrap_active{
     display: block;
     /* display: none; */
