@@ -5,6 +5,10 @@ const minifyCSS = require('gulp-csso');
 const del = require('del');
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
+const autoprefixer = require('gulp-autoprefixer');
+const babel = require('gulp-babel');
+const uglify = require('gulp-uglify');
+const imagemin = require('gulp-imagemin');
 
 // const handlebars = require('gulp-compile-handlebars');
 const rename = require('gulp-rename');
@@ -16,7 +20,7 @@ const proxy = require('http-proxy-middleware');
 // 设置代理
 var jsonPlaceholderProxy = proxy('/topics', {
     target: 'https://cnodejs.org/api/v1',
-    changeOrigin: true, // for vhosted sites, changes host header to match to target's host
+    changeOrigin: true,
     logLevel: 'debug'
 })
 // http://localhost:3333/topics -> https://cnodejs.org/api/v1/topics
@@ -232,48 +236,81 @@ gulp.task('handlebars', () => {
         .pipe(gulp.dest('./src/html'));
 })
 
-gulp.task('js', () => {
-    return gulp.src('./src/js/*.js')
-        .pipe(sourcemaps.init())
-        .pipe(concat('app.min.js'))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./dist/js'));
+
+gulp.task('js-build', () => {
+	return gulp.src('./src/es6/*.js')
+		.pipe(sourcemaps.init())
+		.pipe(babel({
+			presets: ['env']
+		}))
+		.pipe(uglify())
+		.pipe(sourcemaps.write())
+        .pipe(gulp.dest('./dist/js'));	
 })
 
-gulp.task('js-watch', () => {
-    return gulp.src('./src/js/*.js')
+
+gulp.task('js', () => {
+	return gulp.src('./src/es6/*.js')
+		.pipe(sourcemaps.init())
+		.pipe(babel({
+			presets: ['env']
+		}))
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest('./src/js'))
         .pipe(browserSync.stream());
 })
 
 gulp.task('less', () => {
     return gulp.src('./src/less/*.less')
-        .pipe(less())
-        .pipe(minifyCSS())
+		.pipe(less())
+		.pipe(autoprefixer([
+            'ie >= 9',
+            'edge >= 20',
+            'ff >= 44',
+            'chrome >= 48',
+            'safari >= 8',
+            'opera >= 35',
+            'ios >= 8'
+        ]))
         .pipe(gulp.dest('./src/style'))
         .pipe(browserSync.stream());
 })
 
-gulp.task('css', () => {
-    return gulp.src('./src/style/*.css')
-        .pipe(browserSync.stream());
+gulp.task('less-build', () => {
+    return gulp.src('./src/less/*.less')
+		.pipe(less())
+		.pipe(autoprefixer([
+            'ie >= 9',
+            'edge >= 20',
+            'ff >= 44',
+            'chrome >= 48',
+            'safari >= 8',
+            'opera >= 35',
+            'ios >= 8'
+        ]))
+        .pipe(minifyCSS())
+        .pipe(gulp.dest('./dist/style'))
 })
 
-gulp.task('css-build', ['less'], () => {
-	return gulp.src('./src/style/*.css')
-		.pipe(minifyCSS())
-		.pipe(gulp.dest('./dist/style'))
+gulp.task('images', () => {
+	gulp.src('src/assets/img/*')
+		.pipe(imagemin())
+		.pipe(gulp.dest('dist/assets/img'))
 })
 
-gulp.task('sync', ['css', 'less', 'js-watch'], () => {
+
+
+
+gulp.task('sync', ['less', 'js'], () => {
     browserSync.init({
         port: 3333,
         server: {
             baseDir: './src',
-            middleware: [jsonPlaceholderProxy]
+			middleware: [jsonPlaceholderProxy]
         },
     });
-	gulp.watch('./src/style/*.css', ['css']);
     gulp.watch('./src/less/*.less', ['less']);
-    gulp.watch('./src/js/*.js', ['js-watch']);
+	// gulp.watch('./src/js/*.js', ['js']);
+	gulp.watch('./src/es6/*.js', ['js']);
     gulp.watch('./src/*.html').on('change', browserSync.reload)
 })

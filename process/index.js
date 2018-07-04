@@ -264,7 +264,8 @@ ipc.on('gulp', function (event, arg) {
         global, // 全局变量
         template, //模板
     } = arg;
-
+    // console.log("arg.global:", arg.global);
+    
 
     /**
      * 赋值全局常量
@@ -281,15 +282,25 @@ ipc.on('gulp', function (event, arg) {
     }
     fse.ensureDirSync(ProjectPath);
 
+    /**
+     * 拷贝静态资源 & server.js & 全局变量 & packjson写入
+     */
+    const copyDirPath = path.resolve(EasyRoot, './process/gulp/copy');
+    fse.copySync(copyDirPath, ProjectPath);
+
     // base
     gulpRender(getState(), 'base', dispatch);
 
     // css
-    gulpRender(getState(), 'css', dispatch);
     gulpRender(getState(), 'less', dispatch);
 
     // js
     gulpRender(getState(), 'js', dispatch);
+
+    // img
+    gulpRender(getState(), 'img', dispatch);
+
+    // 浏览器
     gulpRender(getState(), 'browser', dispatch);
 
     // 获取状态写入文件
@@ -305,7 +316,7 @@ ipc.on('gulp', function (event, arg) {
         webPackVarStr = webPackVarStr +`const ${wKey} = "${gVars[wKey]}";\n`
     })
 
-    const gVarStr = webPackVarStr.replace(/"<%/g, '').replace(/%>"/g, '');
+    const gVarStr = webPackVarStr.replace(/"<%/g, '').replace(/%>"/g, '').replace('PROXYSTATUS', arg.global.proxy);
     
     let gConfigStr = "";
     Object.keys(gConfigs).map( (key, index) => {

@@ -1,0 +1,1 @@
+window.onload=function(){console.log("Easy Pack !"),console.log("refresh!")};
