@@ -251,19 +251,28 @@ gulp.task('less', () => {
         .pipe(minifyCSS())
         .pipe(gulp.dest('./src/style'))
         .pipe(browserSync.stream());
-
 })
 
-gulp.task('sync', ['less', 'js-watch'], () => {
+gulp.task('css', () => {
+    return gulp.src('./src/style/*.css')
+        .pipe(browserSync.stream());
+})
+
+gulp.task('css-build', ['less'], () => {
+	return gulp.src('./src/style/*.css')
+		.pipe(minifyCSS())
+		.pipe(gulp.dest('./dist/style'))
+})
+
+gulp.task('sync', ['css', 'less', 'js-watch'], () => {
     browserSync.init({
         port: 3333,
         server: {
             baseDir: './src',
             middleware: [jsonPlaceholderProxy]
         },
-        // startPath: '/users'
     });
-
+	gulp.watch('./src/style/*.css', ['css']);
     gulp.watch('./src/less/*.less', ['less']);
     gulp.watch('./src/js/*.js', ['js-watch']);
     gulp.watch('./src/*.html').on('change', browserSync.reload)

@@ -286,9 +286,11 @@ ipc.on('gulp', function (event, arg) {
 
     // css
     gulpRender(getState(), 'css', dispatch);
+    gulpRender(getState(), 'less', dispatch);
 
     // js
     gulpRender(getState(), 'js', dispatch);
+    gulpRender(getState(), 'browser', dispatch);
 
     // 获取状态写入文件
     const {gPackages, gVars, gConfigs} = getState();
