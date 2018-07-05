@@ -264,7 +264,7 @@ ipc.on('gulp', function (event, arg) {
         global, // 全局变量
         template, //模板
     } = arg;
-    // console.log("arg.global:", arg.global);
+    // console.log("arg.style:", arg.style);
     
 
     /**
@@ -285,14 +285,16 @@ ipc.on('gulp', function (event, arg) {
     /**
      * 拷贝静态资源 & server.js & 全局变量 & packjson写入
      */
-    const copyDirPath = path.resolve(EasyRoot, './process/gulp/copy');
-    fse.copySync(copyDirPath, ProjectPath);
+    const copyDirSrcPath = path.resolve(EasyRoot, './process/gulp/copy/src');
+    fse.copySync(copyDirSrcPath, path.resolve(ProjectPath, 'src'));
 
     // base
     gulpRender(getState(), 'base', dispatch);
 
     // css
-    gulpRender(getState(), 'less', dispatch);
+    gulpRender(getState(), style, dispatch);
+    const copyDirStylePath = path.resolve(EasyRoot, './process/gulp/copy', style);
+    fse.copySync(copyDirStylePath, path.resolve(ProjectPath, 'src', style));
 
     // js
     gulpRender(getState(), 'js', dispatch);
@@ -316,13 +318,16 @@ ipc.on('gulp', function (event, arg) {
         webPackVarStr = webPackVarStr +`const ${wKey} = "${gVars[wKey]}";\n`
     })
 
-    const gVarStr = webPackVarStr.replace(/"<%/g, '').replace(/%>"/g, '').replace('PROXYSTATUS', arg.global.proxy);
+    const gVarStr = webPackVarStr
+        .replace(/"<%/g, '')
+        .replace(/%>"/g, '')
+        .replace('PROXYSTATUS', arg.global.proxy);
     
     let gConfigStr = "";
     Object.keys(gConfigs).map( (key, index) => {
         gConfigStr = gConfigStr + `${gConfigs[key]}\n`;
     })
-    gConfigVarStr = gVarStr + '\n' + gConfigStr;
+    gConfigVarStr = gVarStr + '\n' + gConfigStr.replace(/STYLECOMPILER/g, style);
 
     const writeRes = fse.writeFileSync(gulpFilePath, gConfigVarStr, 'utf-8');
     const gulpFilePathData = fse.readFileSync(gulpFilePath, "utf-8");

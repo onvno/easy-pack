@@ -9,6 +9,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
 const imagemin = require('gulp-imagemin');
+const sass = require('gulp-sass');
 
 // const handlebars = require('gulp-compile-handlebars');
 const rename = require('gulp-rename');
@@ -260,6 +261,39 @@ gulp.task('js', () => {
         .pipe(browserSync.stream());
 })
 
+gulp.task('scss', () => {
+	return gulp.src('./src/scss/*.scss')
+		.pipe(sass().on('error', sass.logError))
+		.pipe(autoprefixer([
+            'ie >= 9',
+            'edge >= 20',
+            'ff >= 44',
+            'chrome >= 48',
+            'safari >= 8',
+            'opera >= 35',
+            'ios >= 8'
+        ]))
+		.pipe(gulp.dest('./src/style'))
+		.pipe(browserSync.stream());
+});
+
+gulp.task('scss-build', () => {
+	return gulp.src('./src/scss/*.scss')
+		.pipe(sass().on('error', sass.logError))
+		.pipe(autoprefixer([
+            'ie >= 9',
+            'edge >= 20',
+            'ff >= 44',
+            'chrome >= 48',
+            'safari >= 8',
+            'opera >= 35',
+            'ios >= 8'
+		]))
+		.pipe(minifyCSS())
+		.pipe(gulp.dest('./dist/style'))
+})
+
+
 gulp.task('less', () => {
     return gulp.src('./src/less/*.less')
 		.pipe(less())
@@ -301,7 +335,7 @@ gulp.task('images', () => {
 
 
 
-gulp.task('sync', ['less', 'js'], () => {
+gulp.task('sync', ['less', 'sass', 'js'], () => {
     browserSync.init({
         port: 3333,
         server: {
@@ -309,7 +343,8 @@ gulp.task('sync', ['less', 'js'], () => {
 			middleware: [jsonPlaceholderProxy]
         },
     });
-    gulp.watch('./src/less/*.less', ['less']);
+	gulp.watch('./src/less/*.less', ['less']);
+	gulp.watch('./src/sass/*.scss', ['sass']);
 	// gulp.watch('./src/js/*.js', ['js']);
 	gulp.watch('./src/es6/*.js', ['js']);
     gulp.watch('./src/*.html').on('change', browserSync.reload)

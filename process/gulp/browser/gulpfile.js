@@ -11,7 +11,7 @@ module.exports.var = {
 }
 
 module.exports.config = [
-    "gulp.task('sync', ['less', 'js'], () => {\
+    "gulp.task('sync', ['STYLECOMPILER', 'js'], () => {\
         browserSync.init({\
             port: 3333,\
             server: {\
@@ -19,7 +19,7 @@ module.exports.config = [
                 middleware: [`${proxyList}`]\
             },\
         });\
-        gulp.watch('./src/less/*.less', ['less']);\
+        gulp.watch('./src/STYLECOMPILER/*.STYLECOMPILER', ['STYLECOMPILER']);\
         gulp.watch('./src/es6/*.js', ['js']);\
         gulp.watch('./src/*.html').on('change', browserSync.reload)\
     })"

@@ -22,7 +22,7 @@ submitGulp.addEventListener('click', (e) => {
     e.stopPropagation();
     let res = {};
     let plug = [];
-    let style = [];
+    let style = '';
     let js = [];
     let template = [];
 
@@ -35,13 +35,14 @@ submitGulp.addEventListener('click', (e) => {
     res.project = projectDom.value;
 
     // style集合
-    const styleDom = document.querySelectorAll('.gulpStyle');
-    for(let sd=0; sd<styleDom.length; sd++) {
-        if(styleDom[sd].checked === true) {
-            style.push(styleDom[sd].value)
-        }
+    const radios = document.getElementsByName("styleSelect");
+	for (ri=0; ri<radios.length; ri++) {
+		if (radios[ri].checked) {
+            style = radios[ri].value
+            break;
+		}
     }
-    res.style = style;
+    res.style = style
 
     
     // js集合

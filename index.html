@@ -196,18 +196,16 @@
             
 
             <div class="carding">
-                <h4>CSS样式</h4>
+                <h4>样式</h4>
                 <label class="checkbox-inline">
-                    <input type="checkbox" value="css" class="gulpStyle" checked=true disabled>
-                    CSS
+                    <input type="checkbox" value="autoPrefixer" checked="true">
+                    AutoPrefixer
                 </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" value="less" class="gulpStyle">
-                    Less
+                <label class="radio-inline">
+                    <input type="radio" name="styleSelect" value="less" checked> Less
                 </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" value="scss" class="gulpStyle">
-                    SCSS
+                <label class="radio-inline">
+                    <input type="radio" name="styleSelect" value="scss"> Sass
                 </label>
             </div>
 
@@ -218,13 +216,13 @@
                     JS
                 </label>
                 <label class="checkbox-inline">
-                    <input type="checkbox" value="babel" class="gulpJs">
+                    <input type="checkbox" value="babel" class="gulpJs" checked=true disabled>
                     Babel
                 </label>
             </div>
 
             <div class="carding">
-                <h4>浏览器刷新</h4>
+                <h4>浏览器自动刷新</h4>
                 <label class="checkbox-inline">
                     <input type="checkbox" value="browserSynce" id="gulpBrwoser" checked=true disabled>
                     BrowserSync
@@ -232,7 +230,7 @@
             </div>
 
             <div class="carding">
-                <h4>可选 - HTML模板</h4>
+                <h4>HTML模板</h4>
                 <label class="checkbox-inline">
                     <input type="checkbox" value="handlebars" class="gulpTemp">
                     HandleBars
@@ -240,9 +238,9 @@
             </div>
 
             <div class="carding">
-                <h4>可选 - 代理 & Mock</h4>
+                <h4>代理</h4>
                 <label class="checkbox-inline">
-                    <input type="checkbox" value="proxy" id="gulpProxy">
+                    <input type="checkbox" value="proxy" id="gulpProxy" checked=true>
                     Proxy
                 </label>
             </div>
