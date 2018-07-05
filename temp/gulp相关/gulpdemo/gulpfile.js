@@ -333,6 +333,10 @@ gulp.task('images', () => {
 })
 
 
+gulp.task('build', ['less-build', 'js-build', 'images'], () => {
+	return gulp.src('./src/*.html')
+		.pipe(gulp.dest('./dist'))
+})
 
 
 gulp.task('sync', ['less', 'sass', 'js'], () => {
