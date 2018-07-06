@@ -1,0 +1,7 @@
+{
+    "devDependencies": {
+        "gulp-rename": "^1.3.0",
+        "gulp-compile-handlebars": "^0.6.1",
+        "through2": "^2.0.3"
+    }
+}

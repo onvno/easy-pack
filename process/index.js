@@ -291,6 +291,17 @@ ipc.on('gulp', function (event, arg) {
     // base
     gulpRender(getState(), 'base', dispatch);
 
+    // 模板
+    if(template.length > 0){
+        console.log("template:", template);
+        gulpRender(getState(), template[0], dispatch)
+        const copyDirUtilsPath = path.resolve(EasyRoot, './process/gulp/copy/utils');
+        const copyTemplatePath = path.resolve(EasyRoot, './process/gulp/copy/templates')
+        fse.copySync(copyDirUtilsPath, path.resolve(ProjectPath, 'utils'));
+        fse.copySync(copyTemplatePath, path.resolve(ProjectPath, 'src/templates'))
+    }
+    
+
     // css
     gulpRender(getState(), style, dispatch);
     const copyDirStylePath = path.resolve(EasyRoot, './process/gulp/copy', style);
