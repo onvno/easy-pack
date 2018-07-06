@@ -7,7 +7,7 @@ module.exports.var = {
         changeOrigin: true,\
         logLevel: 'debug'\
     })%>",
-    proxyList : "<%PROXYSTATUS ? proxyDemo : null%>"
+    proxyList : "<%PROXYSTATUS ? [proxyDemo] : null%>"
 }
 
 module.exports.config = [
@@ -16,7 +16,7 @@ module.exports.config = [
             port: 3333,\
             server: {\
                 baseDir: './src',\
-                middleware: [`${proxyList}`]\
+                middleware: proxyList\
             },\
         });\
         gulp.watch('./src/STYLECOMPILER/*.STYLECOMPILER', ['STYLECOMPILER']);\

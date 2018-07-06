@@ -261,7 +261,7 @@ gulp.task('js', () => {
         .pipe(browserSync.stream());
 })
 
-gulp.task('scss', () => {
+gulp.task('sass', () => {
 	return gulp.src('./src/scss/*.scss')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(autoprefixer([
