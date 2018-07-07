@@ -1,10 +1,16 @@
 const initState = {
+    // webpack
     Packages: {},
     Vars: {},
     Configs: {},
     VarsProd: {},
     ConfigsProd: {},
-    DLLCount: 0
+    DLLCount: 0,
+
+    // gulp
+    gPackages: {},
+    gVars: {},
+    gConfigs: {}
 }
 
 const TYPES = {

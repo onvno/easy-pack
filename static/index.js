@@ -10,14 +10,33 @@ tabWrap.addEventListener('click', (e) => {
     const tabAry = Array.prototype.slice.call(tabLikeAry);
     const index = tabAry.indexOf(e.target.parentNode);
     const contLikeAry = document.querySelectorAll('.switch');
+    const epackAry = document.querySelectorAll('.epack');
     // const index = e.target.parent
-    for(var i=0; i<tabAry.length; i++) {
-        if(i !== index){ 
-            tabAry[i].classList.remove('active') 
-            contLikeAry[i].classList.add('hide');
-        } else {
-            tabAry[i].classList.add('active')
-            contLikeAry[i].classList.remove('hide');
+    
+    // outer wrap
+    if(index === 2){
+        // gulp
+        epackAry[0].classList.add('wrap_hide');
+        epackAry[1].classList.remove('wrap_hide');
+        tabAry[2].classList.add('active');
+        
+        tabAry[0].classList.remove('active');
+        tabAry[1].classList.remove('active');
+    } else if(index >= 0) {
+        // webpack
+        epackAry[0].classList.remove('wrap_hide');
+        epackAry[1].classList.add('wrap_hide');
+        tabAry[2].classList.remove('active');
+
+        // webpack3 & 4 切换
+        for(var i=0; i<tabAry.length-1; i++) {
+            if(i !== index){ 
+                tabAry[i].classList.remove('active') 
+                contLikeAry[i].classList.add('hide');
+            } else {
+                tabAry[i].classList.add('active')
+                contLikeAry[i].classList.remove('hide');
+            }
         }
     }
 })
@@ -85,8 +104,8 @@ dirSelect.addEventListener('click', (e) => {
 })
 
 // 数据传递
-const btn = document.getElementById("submit");
-submit.addEventListener('click', (e) => {
+const submitBtn = document.getElementById("submit");
+submitBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     let res = {};
     let opt = [];
@@ -240,3 +259,4 @@ document.getElementById('easy-tit').addEventListener('click', ()=>{
         dialog.showErrorBox('更新提醒', `当前版本: v${packageFile.version}\n可从QQ交流群下载最新版本 ${newVersion}`);
     }
 })
+

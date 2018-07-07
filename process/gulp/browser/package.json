@@ -1,0 +1,6 @@
+{
+    "devDependencies": {
+        "browser-sync": "^2.24.5",
+        "http-proxy-middleware": "^0.18.0"
+    }
+}

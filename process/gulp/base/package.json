@@ -1,0 +1,15 @@
+{
+    "name": "easy-pack",
+    "version": "1.0.0",
+    "description": "每个人心中都有一套属于自己的工程构建/滑稽脸",
+    "scripts": {
+        "start": "gulp sync",
+        "build": "gulp clean && gulp build",
+        "clean": "gulp clean"
+    },
+    "author": "onvno (https://github.com/onvno)",
+    "devDependencies": {
+        "del": "^3.0.0",
+        "gulp": "^3.9.1"
+    }
+}

@@ -171,7 +171,7 @@ p.describe{
 
 
 /* checkbox */
-.checkbox-inline{
+.checkbox-inline, .radio-inline{
     margin-right: 15px;
     margin-left: 0px;
     font-weight: lighter;
@@ -302,3 +302,57 @@ p.describe{
       -webkit-animation-delay: 0s !important;
               animation-delay: 0s !important; }
   
+
+
+/* gulp wrap */
+#gulp_wrap .carding.create-card{
+    position: fixed;
+    width: 350px;
+    bottom: 0;
+}
+.wrap_active{
+    display: block;
+    /* display: none; */
+}
+.wrap_hide{
+    display: none;
+    /* display: block; */
+}
+#gulpSubmit{
+    float: left;
+    width: 50px;
+    height: 30px;
+    border: 1px solid #fff;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 3px;
+    margin-top: 5px;
+    font-weight:lighter;
+    cursor:pointer;
+    transition: all 0.5s;
+}
+#gulpSubmit:hover{
+    background: #fff;
+    color: #2086d7;
+}
+
+#gulpReply{
+    float:left;
+    height:40px;
+    line-height: 40px;
+    font-weight:lighter;
+    margin-left: 5px;
+    color: #fff;
+    margin-left: 20px;
+}
+
+/* loading */
+#gulpLoading{
+    margin-top: 6px;
+    margin-bottom: 6px;
+    width: 310px;
+    padding-left: 40px;
+    box-sizing: border-box;
+    text-align: center;
+}

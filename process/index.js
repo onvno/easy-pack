@@ -12,6 +12,9 @@ const moduleRender = require('./render/modules.js');
 const dllRender = require('./render/dll.js');
 const writeFile = require('./write.js');
 const CONST = require('./constant.js');
+const beautify = require('js-beautify').js_beautify;
+
+const gulpRender = require('./gulp/render/config.js');
 
 // console.log(process.env['APP_PATH']);
 
@@ -46,7 +49,7 @@ ipc.on('open-error-dialog', function (event) {
     dialog.showErrorBox('出错了', '开启DLL的情况,需要填写至少一个依赖')
 })
 
-
+// webpack
 ipc.on('custom', function (event, arg) {
 
     const {
@@ -248,3 +251,156 @@ ipc.on('custom', function (event, arg) {
         event.sender.send('customReply', '创建完成');
     }
 })
+
+// gulp
+ipc.on('gulp', function (event, arg) {
+    // console.log("arg:", arg);
+
+    const {
+        dirSelect, // 项目目录
+        project, // 项目名称
+        style, //样式相关
+        js, //js相关
+        global, // 全局变量
+        template, //模板
+    } = arg;
+    // console.log("arg:", arg);
+    
+
+    /**
+     * 赋值全局常量
+     */
+    const ProjectPath = path.resolve(dirSelect, project)
+    // console.log("dirSelect:", dirSelect, '\nproject:', project);
+
+    /**
+     * 创建项目目录
+     */
+    if(fs.existsSync(ProjectPath)){
+        event.sender.send('gulpReply', '项目已存在，请重新输入目录');
+        return 
+    }
+    fse.ensureDirSync(ProjectPath);
+
+    /**
+     * 拷贝静态资源 & server.js & 全局变量 & packjson写入
+     */
+    const copyDirSrcPath = path.resolve(EasyRoot, './process/gulp/copy/src');
+    const copyREADMEPATH = path.resolve(EasyRoot, './process/gulp/copy/README.md')
+    fse.copySync(copyDirSrcPath, path.resolve(ProjectPath, 'src'));
+    fse.copySync(copyREADMEPATH, path.resolve(ProjectPath, 'src/README.md'))
+
+    /**
+     * 创建constant.json
+     */
+    const CONSTJSONDATA = Object.assign({},
+        {
+            devTaskList : template.length ? ['js', `${style}`, `${template[0]}`] : ['js', `${style}`, 'html'],
+            buildTaskList : template.length ? ['images', 'vendor', 'js-build', `${style}-build`, `${template[0]}-build`] : ['images', 'vendor','js-build', `${style}-build`, 'html-build'],
+            proxyStatus : arg.global.proxy,
+        }
+    )
+    const CONSTJSONPATH = path.resolve(ProjectPath, 'constant.json');
+    fs.writeFileSync(CONSTJSONPATH, JSON.stringify(CONSTJSONDATA, null, 4), 'utf-8');
+
+
+    // base
+    gulpRender(getState(), 'base', dispatch);
+
+    // 模板
+    if(template.length > 0){
+        // console.log("template:", template);
+        gulpRender(getState(), template[0], dispatch)
+        const copyDirUtilsPath = path.resolve(EasyRoot, './process/gulp/copy/utils');
+        const copyTemplatePath = path.resolve(EasyRoot, './process/gulp/copy/templates')
+        fse.copySync(copyDirUtilsPath, path.resolve(ProjectPath, 'utils'));
+        fse.copySync(copyTemplatePath, path.resolve(ProjectPath, 'src/templates'))
+    } else {
+        gulpRender(getState(), 'html', dispatch)
+        const copyHTMLPath = path.resolve(EasyRoot, './process/gulp/copy/html')
+        fse.copySync(copyHTMLPath, path.resolve(ProjectPath, 'src/html'))
+    }
+
+    // vendor
+    gulpRender(getState(), 'vendor', dispatch);
+
+    // css
+    gulpRender(getState(), style, dispatch);
+    const copyDirStylePath = path.resolve(EasyRoot, './process/gulp/copy', style);
+    fse.copySync(copyDirStylePath, path.resolve(ProjectPath, 'src', style));
+
+    // js
+    gulpRender(getState(), 'js', dispatch);
+
+    // img
+    gulpRender(getState(), 'img', dispatch);
+
+    // 浏览器
+    gulpRender(getState(), 'browser', dispatch);
+
+    // 获取状态写入文件
+    const {gPackages, gVars, gConfigs} = getState();
+    const gulpFilePath = path.resolve(ProjectPath, 'gulpfile.js');
+    
+    // 写入gulpfile.js
+    let gConfigVarStr = "";
+    let webPackVarStr = "";
+    const webPackVarKeys = Object.keys(gVars);
+
+    webPackVarKeys.map( (wKey, wIndex) => {
+        webPackVarStr = webPackVarStr +`const ${wKey} = "${gVars[wKey]}";\n`
+    })
+
+    const gVarStr = webPackVarStr
+        .replace(/"<%/g, '')
+        .replace(/%>"/g, '')
+        .replace('PROXYSTATUS', arg.global.proxy)
+        
+    
+    let gConfigStr = "";
+    Object.keys(gConfigs).map( (key, index) => {
+        gConfigStr = gConfigStr + `${gConfigs[key]}\n`;
+    })
+    gConfigVarStr = gVarStr + '\n' + 
+        gConfigStr
+        .replace(/TEMPLATENAME/, template.length ? template[0] : 'html')
+        .replace(/TEMPLATEFOLDER/, template.length ? 'templates': 'html')
+        .replace(/STYLENAME/g, style);
+
+    const writeRes = fse.writeFileSync(gulpFilePath, gConfigVarStr, 'utf-8');
+    const gulpFilePathData = fse.readFileSync(gulpFilePath, "utf-8");
+    const beautifyData = beautify(
+        gulpFilePathData, { 
+        indent_size: 4,
+        break_chained_methods: true
+    });
+    fse.writeFileSync(gulpFilePath, beautifyData, 'utf-8');
+
+    // 写入package.json
+    const gulpPackJSON = path.resolve(ProjectPath, 'package.json');
+    const JSONStr = JSON.stringify(gPackages, null, 4);
+    const writeJSON = fse.writeFileSync(gulpPackJSON, JSONStr, 'utf-8')
+
+    // 清空状态
+    dispatch({
+        type: TYPES.update,
+        payload: {
+            Packages: {},
+            Vars: {},
+            Configs: {},
+            VarsProd: {},
+            ConfigsProd: {},
+
+            gPackages: {},
+            gVars: {},
+            gConfigs: {}
+        }
+    })
+    
+    event.sender.send('gulpReply', '创建完成');
+    // if(writeRes && writeJSON) {
+    //     event.sender.send('gulpReply', '创建完成');
+    // }
+})
+
+
