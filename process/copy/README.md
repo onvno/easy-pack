@@ -31,7 +31,7 @@ $ npm install
 *build*
 
 ```
-$ npm run prod
+$ npm run build
 ```
 
 
