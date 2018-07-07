@@ -8,9 +8,7 @@
 - 输出暴露配置文件，方便自定义及优化
 
 
-![](http://ww1.sinaimg.cn/large/63885f75ly1fruz0ynqdsg20g80mqqc4.gif)
-
-
+![](http://ww1.sinaimg.cn/large/63885f75ly1ft1jz4x5txg20g50mqtjh.gif)
 
 #### 说明
 
