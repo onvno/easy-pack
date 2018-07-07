@@ -309,7 +309,7 @@ ipc.on('gulp', function (event, arg) {
 
     // 模板
     if(template.length > 0){
-        console.log("template:", template);
+        // console.log("template:", template);
         gulpRender(getState(), template[0], dispatch)
         const copyDirUtilsPath = path.resolve(EasyRoot, './process/gulp/copy/utils');
         const copyTemplatePath = path.resolve(EasyRoot, './process/gulp/copy/templates')
