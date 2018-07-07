@@ -5,8 +5,8 @@ module.exports.var = {
 
 module.exports.config = [
     "gulp.task('images', () => {\
-        gulp.src('src/assets/img/*')\
+        gulp.src('src/img/**/*')\
             .pipe(imagemin())\
-            .pipe(gulp.dest('dist/assets/img'))\
+            .pipe(gulp.dest('dist/img'))\
     })"
 ]

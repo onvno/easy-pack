@@ -1,28 +1,26 @@
 module.exports.var = {
-    gulp : "<%require('gulp')%>",
-    browserSync : "<%require('browser-sync').create()%>",
+    CONST : "<%require('./constant.json')%>",
     proxy : "<%require('http-proxy-middleware')%>",
     proxyDemo: "<%proxy('/topics', {\
         target: 'https://cnodejs.org/api/v1',\
         changeOrigin: true,\
         logLevel: 'debug'\
     })%>",
-    proxyList : "<%PROXYSTATUS ? [proxyDemo] : null%>",
-    CONST : "<%require('./constant.json')%>",
+    proxyList : "<%PROXYSTATUS ? [proxyDemo] : null%>"
 }
 
 module.exports.config = [
-    "gulp.task('sync', CONST.devTaskList, () => {\
+    "gulp.task('sync', ['STYLECOMPILER', 'js', 'handlebars'], () => {\
         browserSync.init({\
             port: 3333,\
             server: {\
                 baseDir: './src',\
                 middleware: proxyList\
             },\
-            startPath: 'html/index.html'\
         });\
+        gulp.watch('./src/templates/**/*.*', ['handlebars']);\
+        gulp.watch('./src/STYLECOMPILER/*.STYLECOMPILER', ['STYLECOMPILER']);\
         gulp.watch('./src/es6/*.js', ['js']);\
-        gulp.watch('./src/STYLENAME/*.STYLENAME', ['STYLENAME']);\
-        gulp.watch('./src/TEMPLATEFOLDER/**/*.*', ['TEMPLATENAME'])\
+        gulp.watch('./src/*.html').on('change', browserSync.reload)\
     })"
 ]

@@ -67,6 +67,37 @@ gulp.task('handlebars', () => {
 		// })
 })
 
+gulp.task('handlebars-build', () => {
+
+    options = {
+		ignorePartials: true, //ignores the unknown footer2 partial in the handlebars template, defaults to false
+        batch : ['./src/templates/partials'],
+        helpers : {
+			capitals : function(str){
+				return str.toUpperCase();
+			}
+		}
+    }
+
+    return gulp.src([
+            './src/templates/**/*.handlebars',
+            '!./src/templates/partials/*',
+        ])
+        // .on('data', (file) => {
+        //     console.log("ffff:", file.path);
+        // })
+        .pipe(handlebarsDataChange())
+        .pipe(handlebars(options))
+        .pipe(rename({
+            extname: ".html"
+        }))
+		.pipe(gulp.dest('./dist/html'))
+		.pipe(browserSync.stream())
+		// .on('end', () => {
+		// 	console.log('end!!!!');
+		// })
+})
+
 
 gulp.task('js-build', () => {
 	return gulp.src('./src/es6/*.js')
@@ -168,6 +199,10 @@ gulp.task('build', ['less-build', 'js-build', 'images'], () => {
 		.pipe(gulp.dest('./dist'))
 })
 
+gulp.task('html', () => {
+    return gulp.src('./src/html/**/*.html')
+        .pipe(gulp.dest('./dist/html'))
+})
 
 gulp.task('sync', ['less', 'sass', 'handlebars', 'js'], () => {
     browserSync.init({
@@ -176,11 +211,11 @@ gulp.task('sync', ['less', 'sass', 'handlebars', 'js'], () => {
             baseDir: './src',
 			middleware: [jsonPlaceholderProxy]
         },
+        startPath: 'html/index.html'
 	});
 	gulp.watch('./src/templates/**/*.*', ['handlebars'])
 	gulp.watch('./src/less/*.less', ['less']);
 	gulp.watch('./src/sass/*.scss', ['sass']);
-	// gulp.watch('./src/js/*.js', ['js']);
 	gulp.watch('./src/es6/*.js', ['js']);
-    gulp.watch('./src/*.html').on('change', browserSync.reload)
+    // gulp.watch('./src/*.html').on('change', browserSync.reload)
 })

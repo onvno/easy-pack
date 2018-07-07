@@ -4,7 +4,7 @@
     "description": "每个人心中都有一套属于自己的工程构建/滑稽脸",
     "scripts": {
         "start": "gulp sync",
-        "build": "gulp build",
+        "build": "gulp clean && gulp build",
         "clean": "gulp clean"
     },
     "author": "onvno (https://github.com/onvno)",

@@ -74,7 +74,6 @@ submitGulp.addEventListener('click', (e) => {
         proxy: proxyStatus,
         browser: browserStatus,
         buildDir,
-        devDllDir
     }
     res.global = global;
 
@@ -89,3 +88,21 @@ submitGulp.addEventListener('click', (e) => {
 
     ipcRenderer.send('gulp', res);
 })
+
+
+ipcRenderer.on('gulpReply', function (event, arg) {
+    const message = `结果: ${arg}`
+    const replayDOM = document.getElementById('gulpReply');
+    const loaderDOM = document.getElementById('gulpLoading');
+    replayDOM.innerHTML = message;
+    setTimeout(()=>{
+        replayDOM.classList.remove('hide');
+        replayDOM.classList.add('show');
+        loaderDOM.classList.remove('show');
+        loaderDOM.classList.add('hide');
+        setTimeout(() => {
+            replayDOM.innerHTML = '继续对自己好一点，Easy Pack !'
+        }, 5000);
+    }, 1000)
+})
+

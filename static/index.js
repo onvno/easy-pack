@@ -259,3 +259,4 @@ document.getElementById('easy-tit').addEventListener('click', ()=>{
         dialog.showErrorBox('更新提醒', `当前版本: v${packageFile.version}\n可从QQ交流群下载最新版本 ${newVersion}`);
     }
 })
+

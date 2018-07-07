@@ -1,4 +1,4 @@
 {
-    "styleUrl": "../style/index.css",
+    "styleUrl": "./style/index.css",
     "jsUrl": "../js/index.js"
 }

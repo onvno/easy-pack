@@ -1,14 +1,14 @@
 module.exports.var = {
     gulp : "<%require('gulp')%>",
     del : "<%require('del')%>",
+    CONST : "<%require('./constant.json')%>",
 }
 
 module.exports.config = [
-    "gulp.task('del', function() {\
+    "gulp.task('clean', function() {\
         del('./dist');\
     });",
-    "gulp.task('build', ['STYLECOMPILER-build', 'js-build', 'images'], () => {\
-        return gulp.src('./src/*.html')\
-            .pipe(gulp.dest('./dist'))\
-    })"
+    "gulp.task('build', CONST.buildTaskList)"
 ]
+
+// CONST : "<%require('./constant.json')%>",
